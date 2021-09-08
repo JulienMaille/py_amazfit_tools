@@ -4,6 +4,7 @@ from watchFaceParser.elements.gtr2.system import System
 from watchFaceParser.elements.gtr2.screenNormal import ScreenNormal
 from watchFaceParser.elements.gtr2.screenIdle import ScreenIdle
 from watchFaceParser.elements.gtr2.widgets import Widgets
+from watchFaceParser.elements.gtr2.shortcuts import Shortcuts
 
 class WatchFace:
     definitions = {

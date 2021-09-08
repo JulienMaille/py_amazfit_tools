@@ -11,7 +11,8 @@ class Battery:
         2: { 'Name': 'Images', 'Type': ImageSet}, # gtr
         3: { 'Name': 'Icons', 'Type': IconSet},   # gtr
         4: { 'Name': 'Unknown4', 'Type': ClockHand},
-        6: { 'Name': 'Percent', 'Type': Image},
+        5: { 'Name': 'PercentImage', 'Type': Image},
+        6: { 'Name': 'CircleScale', 'Type': CircleScale},
         7: { 'Name': 'Scale', 'Type': CircleScale}, # verge
     }
 

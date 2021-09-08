@@ -9,5 +9,5 @@ class Image:
         5: { 'Name': 'DecimalPointImageIndex', 'Type': 'long'},
         6: { 'Name': 'MultilangImageUnit', 'Type': [MultilangImage]},
         7: { 'Name': 'DelimiterImageIndex', 'Type': 'long'},
-        8: { 'Name': 'Unknown8', 'Type': 'long'},
+        8: { 'Name': 'MultilangImageUnitMile', 'Type': [MultilangImage]},
     }

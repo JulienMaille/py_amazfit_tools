@@ -1,6 +1,7 @@
 from watchFaceParser.elements.timeElements.twoDigits import TwoDigits
 from watchFaceParser.elements.timeElements.amPm import AmPm
 from watchFaceParser.elements.timeElements.pm import Pm
+from watchFaceParser.elements.timeElements.amPmIcon import AmPmIcon
 from watchFaceParser.elements.basicElements.image import Image
 
 class Time:
@@ -10,6 +11,7 @@ class Time:
         3: { 'Name': 'Seconds', 'Type': TwoDigits},
         4: { 'Name': 'AmPm', 'Type': AmPm},
         5: { 'Name': 'DrawingOrder', 'Type': 'long?'},
+        7: { 'Name': 'AmPmIcon', 'Type': AmPmIcon},
         9: { 'Name': 'Unknown9', 'Type': 'long?'},
         10: { 'Name': 'Delimiter', 'Type': Image}, # verge
         11: { 'Name': 'Delimiter2', 'Type': Image}, # gts

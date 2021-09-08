@@ -14,7 +14,8 @@ class Activity:
         3: { 'Name': 'Pulse', 'Type': Number},
         4: { 'Name': 'Distance', 'Type': Distance},
         5: { 'Name': 'Steps', 'Type': FormattedNumber},
-        7: { 'Name': 'StarImage', 'Type': Image}, #gtr
+        7: { 'Name': 'Unknown7', 'Type': 'long'}, #gtr2mini
+        #7: { 'Name': 'StarImage', 'Type': Image}, #gtr
         8: { 'Name': 'CaloriesIcon', 'Type': Image}, #gts - Chiba petals_60247
         9: { 'Name': 'CircleRange', 'Type': Image}, # verge
         11: { 'Name': 'PulseMeter', 'Type': CircleScale}, # gts circle.bin

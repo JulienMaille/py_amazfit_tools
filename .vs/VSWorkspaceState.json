@@ -11,6 +11,6 @@
     "\\watchFaceParser\\models\\gtr2",
     "\\watchFaceParser\\utils"
   ],
-  "SelectedNode": "\\watchFaceParser\\elements\\gtr2\\date.py",
+  "SelectedNode": "\\watchFaceParser\\utils\\resourcesLoader.py",
   "PreviewInSolutionExplorer": false
 }

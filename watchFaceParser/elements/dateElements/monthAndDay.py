@@ -7,4 +7,6 @@ class MonthAndDay:
         2: { 'Name': 'OneLine', 'Type': OneLineMonthAndDay},
         3: { 'Name': 'TwoDigitsMonth', 'Type': 'bool'},
         4: { 'Name': 'TwoDigitsDay', 'Type': 'bool'},
+        5: { 'Name': 'Unknown5', 'Type': 'bool'},
+        6: { 'Name': 'Unknown6', 'Type': 'bool'},
     }

@@ -18,7 +18,7 @@ class ImageLoader:
             if resource != None:
                 return resource
 
-        raise FileNotFoundException(f"File referenced by index {index} not found.")
+        raise Exception(f"File referenced by index {index} not found.")
 
 
     @staticmethod
@@ -39,5 +39,5 @@ class ImageLoader:
     @staticmethod
     def openImage(fullFileName):
         from PIL import Image
-        image = Image.open(fullFileName)
+        image = Image.open(fullFileName).convert("RGBA")
         return image

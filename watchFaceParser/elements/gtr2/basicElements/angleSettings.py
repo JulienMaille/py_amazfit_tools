@@ -1,6 +1,6 @@
 ﻿from watchFaceParser.elements.gtr2.basicElements.multilangImage import MultilangImage 
 
-class ImageAngle:
+class AngleSettings:
     definitions = {
         1: { 'Name': 'X', 'Type': 'long'}, # circle center
         2: { 'Name': 'Y', 'Type': 'long'}, # circle center

@@ -9,5 +9,5 @@ class Text:
         3: { 'Name': 'Alignment', 'Type': TextAlignmentGTR2},
         4: { 'Name': 'Spacing', 'Type': 'long'}, 
         5: { 'Name': 'PaddingZero', 'Type': 'bool'},
-        6: { 'Name': 'Unknown6', 'Type': 'long'}, 
+        6: { 'Name': 'DisplayFormAnalog', 'Type': 'bool'}, 
     }

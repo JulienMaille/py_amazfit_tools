@@ -1,4 +1,4 @@
-﻿class FontRotate:
+class FontRotate:
     definitions = {
 		1: { 'Name': 'X', 'Type': 'int'}, # circle center
         2: { 'Name': 'Y', 'Type': 'int'}, # circle center

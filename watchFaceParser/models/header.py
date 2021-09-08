@@ -10,6 +10,8 @@ class Header:
     unknownPos = 32
     parametersSizePos = 36
 
+    basenamehash = ""
+
     def __init__(self, unknown, parametersSize, deviceId = None):
         self.signature = Header.dialSignature
         self.unknown = unknown
@@ -22,11 +24,17 @@ class Header:
 
     def writeTo(self, stream): 
         val_11= 0x06
-        if Config.isGtr2Mode() :
+        if Config.isGtr2Mode() or Config.isGts2Mode() or Config.isTrexProMode():
             Header.headerSize = 88
             Header.unknownPos = 76
             Header.parametersSizePos = 80 
-            self.signature = b"UIHH\x02\x00\xff"
+            self.signature = b"UIHH\x02\x00\xff" 
+            val_11 = 0x01
+        elif Config.isGtr2MiniMode(): #or  Config.isGts2MiniMode():
+            Header.headerSize = 87
+            Header.unknownPos = 75
+            Header.parametersSizePos = 73  
+            self.signature = b"UIHH\x01\x00\xff"
             val_11 = 0x01
         else:
             Header.headerSize = 64
@@ -65,12 +73,18 @@ class Header:
             50 : [0x34, 0x00, 0x1e, 0x1c, 0x00, 0x00, 0x49, 0xce], # trex
             53 : [0x35, 0x00, 0x09, 0x00, 0x00, 0x00, 0x4b, 0x9a], # AmazfitX
             59 : [0x3B, 0x00, 0x97, 0x04, 0x00, 0x00, 0x97, 0xD1, 0x02, 0x00], #gtr2
+            65 : [0x41, 0x00, 0x51, 0x04, 0x00, 0x00, 0x43, 0x01, 0x02, 0x00], #gts2: 0x51, 0x04, 0x00, 0x00, 0x43, 0x01, 0x02, 0x00 - may vary
+            83 : [0x53, 0x00, 0x36, 0x04, 0x00, 0x00, 0x1E, 0xAB, 0x03, 0x00], #gtr2
         }
 
         if Config.isGtrMode():
             index = Config.isGtrMode()
         elif Config.isGtr2Mode():
             index = 59
+        elif Config.isGts2Mode():
+            index = 65
+        elif Config.isTrexProMode():
+            index = 83
         elif Config.isGtsMode():
             index = Config.isGtsMode()
         elif Config.isTrexMode():
@@ -81,10 +95,13 @@ class Header:
         for i in range(len(p_0x10)):
             buffer[0x10 + i] = p_0x10[i]
         # hard coding?
-        if Config.isGtr2Mode():
+        if Config.isGtr2Mode() or Config.isGts2Mode() or Config.isTrexProMode():
             buffer[12:12+4] = int(57305).to_bytes(4, byteorder='little') #some size??
             buffer[84:84+4] = int(48).to_bytes(4, byteorder='little')
-            buffer[75] = 0x01
+            if Config._oldformat:
+                buffer[75] = 0x00
+            else:
+                buffer[75] = 0x01
         else:
             buffer[60:60+4] = int(64).to_bytes(4, byteorder='little')
 
@@ -98,17 +115,23 @@ class Header:
             Header.headerSize = 40 - 16
             Header.unknownPos = 32 - 16
             Header.parametersSizePos = 36 - 16
-        elif Config.isGtr2Mode() :
+        elif Config.isGtr2Mode() or Config.isGts2Mode() or Config.isTrexProMode() :
             Header.headerSize = 88 - 16
             Header.unknownPos = 76 - 16
-            Header.parametersSizePos = 80 - 16
+            Header.parametersSizePos = 80 - 16 
+        elif Config.isGtr2MiniMode(): #or  Config.isGts2MiniMode()
+            Header.headerSize = 87 - 16
+            Header.unknownPos = 75 - 16
+            Header.parametersSizePos = 83 - 16 
         else:
             Header.headerSize = 64 - 16
             Header.unknownPos = 52 - 16
             Header.parametersSizePos = 56 - 16 
 
-        if Config.isGtr2Mode():
+        if Config.isGtr2Mode() or Config.isGts2Mode() or Config.isTrexProMode():
            Header.dialSignature = b"UIHH\x02\x00\xff"
+        elif Config.isGtr2MiniMode(): #or  Config.isGts2MiniMode()
+             Header.dialSignature = b"UIHH\x01\x00\xff"
 
         buffer = stream.read(Header.headerSize)
         header = Header(
@@ -116,11 +139,15 @@ class Header:
             parametersSize = int.from_bytes(buffer[Header.parametersSizePos:Header.parametersSizePos+4], byteorder='little'),
             deviceId = int.from_bytes(buffer[Header.deviceIdPos:Header.deviceIdPos+1], byteorder='little'))
         header.signature = sig_buffer[0:7]
+
+        if  Config.isGtr2Mode() or Config.isGts2Mode() or Config.isTrexProMode():
+            if buffer[75-16] == 0x00:
+                Config.setOldFormat(True)
         return header
     
     @staticmethod
     def patchHeaderAfter( outputFileName ):
-        if Config.isGtr2Mode(): 
+        if Config.isGtr2Mode() or Config.isGts2Mode() or Config.isTrexProMode(): 
             with open(outputFileName, 'rb+') as fileStream:
                 logging.debug(f"Injecting additional header info") 
                 header = bytearray( fileStream.read(40) )       
@@ -129,11 +156,17 @@ class Header:
                 size = len(data)
                 header[32:32+4] = int(size).to_bytes(4, byteorder='little')
                 logging.debug(f"Injected size: {size}")
-                #write crc   
-                logging.debug(f"Calculationg crc")
-                crc = Header.crc16(data,0,min(len(data), 5000))
-                logging.debug(f"Injected crc: {crc:02X}")
-                header[18:18+2] = crc.to_bytes(2, byteorder='little')
+                
+                # write basename as 7 bit hash
+                import hashlib, os
+                baseName, _ = os.path.splitext(os.path.basename(outputFileName))
+                basenamehash = bytearray(hashlib.shake_128(baseName.encode()).digest(7)) # 7 bit hash
+                logging.debug(f"basename: {baseName}")
+                logging.debug(f"hash lenght: {len(basenamehash)}")
+                logging.debug("basename 7 byte hash " + "".join("%02x" % b for b in basenamehash))
+                header[12:12+2] = basenamehash[0:2]#.to_bytes(2, byteorder='little')
+                header[18:18+2] = basenamehash[2:4]#.to_bytes(2, byteorder='little')
+                header[22:22+3] = basenamehash[4:7]#.to_bytes(3, byteorder='little')
                 
                 fileStream.seek(0)
                 fileStream.write(header)

@@ -7,6 +7,7 @@ class BatteryElement(ContainerElement):
     def __init__(self, parameter, parent = None, name = None):
         self._text = None
         self._percent = None
+        self._percentImage = None
         self._scale = None
         self._images = None
         self._unknown4 = None
@@ -29,6 +30,9 @@ class BatteryElement(ContainerElement):
     def getImages(self):
         return self._images
 
+    def getPercentImage(self):
+        return self._percentImage
+
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
@@ -49,6 +53,10 @@ class BatteryElement(ContainerElement):
             from watchFaceParser.models.elements.analogDial.secondsClockHandElement import SecondsClockHandElement # must must be own. fix it!!
             self._unknown4 = SecondsClockHandElement(parameter = parameter, parent = self, name = 'Unknown4')
             return self._unknown4			
+        elif parameterId == 5: #percentImage
+            from watchFaceParser.models.elements.common.imageElement import ImageElement
+            self._percentImage = ImageElement(parameter = parameter, parent = self, name = 'PercentImage')
+            return self._percentImage
         elif parameterId == 6: #percent
             from watchFaceParser.models.elements.battery.percentElement import PercentElement
             self._percent = PercentElement(parameter = parameter, parent = self, name = '?_images?')

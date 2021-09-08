@@ -59,7 +59,7 @@ class Parser:
         assert(type(outputFileName) == str)
         assert(type(imagesDirectory) == str)
         try:
-            if Config.isGtr2Mode(): 
+            if not Config.isOldFormat() and (Config.isGtr2Mode() or Config.isGts2Mode() or Config.isTrexProMode()): 
                 from watchFaceParser.watchFaceGTR2 import WatchFace
             else:
                 from watchFaceParser.watchFace import WatchFace
@@ -74,8 +74,9 @@ class Parser:
                 Config.setDeviceId(descriptor.pop(0).getChildren()[0].getValue())
 
             baseName, _ = os.path.splitext(os.path.basename(outputFileName))
-            if not Config.isGtr2Mode(): 
-                Parser.generatePreviews(descriptor, imagesReader.getImages(), outputDirectory, baseName) 
+            #if not Config.isGtr2Mode() and not Config.isGts2Mode() and not Config.isTrexProMode(): 
+            #    Parser.generatePreviews(descriptor, imagesReader.getImages(), outputDirectory, baseName) 
+            Parser.generatePreviews(descriptor, imagesReader.getImages(), outputDirectory, baseName) 
 
             logging.debug(f"Writing watch face to '{outputFileName}'")
             with open(outputFileName, 'wb') as fileStream:
@@ -249,7 +250,7 @@ class Parser:
 
         logging.debug("generatePreviews")
         #TODO implement models
-        #Parser.generatePreviews(reader.getParameters(), reader.getImages(), outputDirectory, baseName)
+        Parser.generatePreviews(reader.getParameters(), reader.getImages(), outputDirectory, baseName)
         logging.debug("generatePreviews done")
 
         logging.debug("Exporting resources to '%s'" % (outputDirectory, ))
@@ -275,11 +276,13 @@ class Parser:
     @staticmethod
     def parseResources(reader):
         logging.debug("Parsing parameters...")
-        if Config.isGtr2Mode(): 
+        print(Config.isOldFormat())
+        if not Config.isOldFormat() and (Config.isGtr2Mode() or Config.isGts2Mode() or Config.isTrexProMode()): 
             from watchFaceParser.watchFaceGTR2 import WatchFace
         else:
             from watchFaceParser.watchFace import WatchFace
         try:
+            ParametersConverter.listParams(reader.getParameters())
             return ParametersConverter.parse(WatchFace, reader.getParameters())
         except Exception as e:
             logging.fatal(e, exc_info=True)
@@ -296,77 +299,96 @@ class Parser:
         logging.debug("Generating previews...")
 
         states = Parser.getPreviewStates(outputDirectory)
-        logging.debug("Generating states done...")
-        staticPreview = PreviewGenerator.createImage(parameters, images, WatchState())
+        import sys
+        try:
+            logging.debug("Generating states done...")
+            staticPreview = PreviewGenerator.createImage(parameters, images, WatchState())
 
-        logging.debug("Generating static preview gen done...")
-        staticPreview.save(os.path.join(outputDirectory, f"{baseName}_static.png"))
+            logging.debug("Generating static preview gen done...")
+            staticPreview.save(os.path.join(outputDirectory, f"{baseName}_static.png"))
 
-        #generate small preview image for Preview section.
-        from PIL import Image, ImageDraw, ImageOps
-        new_w, new_h = Config.getPreviewSize()
-        if Config.isGtsMode:
-            im_resized = ImageOps.expand(staticPreview, border=5)
-            im_resized = im_resized.resize((new_w, new_h), resample = Image.LANCZOS)
-        else:
-            im_resized = staticPreview.resize((new_w, new_h), resample = Image.LANCZOS)
+            #generate small preview image for Preview section.
+            from PIL import Image, ImageDraw, ImageOps
+            new_w, new_h = Config.getPreviewSize()
+            if Config.isGtsMode() or Config.isGts2Mode():
+                im_resized = ImageOps.expand(staticPreview, border=5)
+                im_resized = im_resized.resize((new_w, new_h), resample = Image.LANCZOS)
+            else:
+                im_resized = staticPreview.resize((new_w, new_h), resample = Image.LANCZOS)
+                
+            def rounded_rectangle(draw, box, radius, color):
+                l, t, r, b = box
+                d = radius * 2
+                draw.ellipse((l, t, l + d, t + d), color)
+                draw.ellipse((r - d, t, r, t + d), color)
+                draw.ellipse((l, b - d, l + d, b), color)
+                draw.ellipse((r - d, b - d, r, b), color)
+                d = radius
+                draw.rectangle((l, t + d, r, b - d), color)
+                draw.rectangle((l + d, t, r - d, b), color)
 
-        def rounded_rectangle(draw, box, radius, color):
-            l, t, r, b = box
-            d = radius * 2
-            draw.ellipse((l, t, l + d, t + d), color)
-            draw.ellipse((r - d, t, r, t + d), color)
-            draw.ellipse((l, b - d, l + d, b), color)
-            draw.ellipse((r - d, b - d, r, b), color)
-            d = radius
-            draw.rectangle((l, t + d, r, b - d), color)
-            draw.rectangle((l + d, t, r - d, b), color)
+            corner_radius = 38
 
-        xy = (10,310)
-        corner_radius = 38
+            if Config.isGtsMode():
+                mask = Image.new("RGBA", Config.getPreviewSize(), (255, 255, 255, 0))
+                d = ImageDraw.Draw(mask)
 
-        if Config.isGtsMode():
-            mask = Image.new("RGBA", Config.getPreviewSize(), (255, 255, 255, 0))
-            d = ImageDraw.Draw(mask)
+                rounded_rectangle(d,(3,3 , new_w -3,new_h-3),corner_radius,(180,180,180,255))
+                rounded_rectangle(d,(5,5 , new_w-5,new_h-5),corner_radius,(255,255,255,0))
+                im_resized.paste(mask,(0,0),mask)
 
-            rounded_rectangle(d,(3,3 , new_w -3,new_h-3),corner_radius,(180,180,180,255))
-            rounded_rectangle(d,(5,5 , new_w-5,new_h-5),corner_radius,(255,255,255,0))
-            im_resized.paste(mask,(0,0),mask)
+            im_resized.save(os.path.join(outputDirectory, f"{baseName}_static_{new_h}.png"))
+            logging.debug("Generating static preview save done...")
 
-        im_resized.save(os.path.join(outputDirectory, f"{baseName}_static_{new_h}.png"))
-        logging.debug("Generating static preview save done...")
+            previewImages = PreviewGenerator.createAnimation(parameters, images, states)
+            logging.debug("Generating anim preview gen done...")
 
-        previewImages = PreviewGenerator.createAnimation(parameters, images, states)
-        logging.debug("Generating anim preview gen done...")
+            images = []
 
-        images = []
-        for previewImage in previewImages:
-            images.append(previewImage)
-        images[0].save(os.path.join(outputDirectory, f"{baseName}_animated.gif"),
-            save_all=True,
-            append_images=images[1:],
-            duration=1000,
-            loop=0)
+            for previewImage in previewImages:
+                images.append(previewImage)
+            if len(images) > 0:
+                images[0].save(os.path.join(outputDirectory, f"{baseName}_animated.gif"),
+                               save_all=True,
+                               append_images=images[1:],
+                               duration=1000,
+                               loop=0)
+            else:
+                logging.debug("Nothing to save in animated gif...")
+        except Exception as e:
+            logging.error("Preview Generate Error...")
+            logging.error(e, exc_info=True)
 
 
     @staticmethod
     def getPreviewStates(outputDirectory):
         import os
-        previewStatesPath = os.path.join(outputDirectory, "PreviewStates.json")
+        preview_states_path = os.path.join(outputDirectory, "Preview.States")
 
-        if os.path.exists(previewStatesPath):
+        if os.path.exists(preview_states_path):
+            preview_states = []
             try:
-                with open(previewStatesPath, 'rb') as stream:
-                    return WatchState.fromJson(json.load(stream))
-            except:
-                pass
+                with open(preview_states_path, 'rb') as stream:
+                    data = json.load(stream)
+                    if isinstance(data, list):
+                        for d in data:
+                            w = WatchState.fromJson(d)
+                            preview_states.append(w)
+                    else:
+                        w = WatchState.fromJson(data)
+                        preview_states.append(w)
+                    return preview_states
+            except Exception as e:
+                logging.error("States Parse Error...")
+                logging.error(e, exc_info=True)
+                return preview_states
 
-        previewStates = Parser.generateSampleStates()
-        with open(previewStatesPath, 'w') as stream:
-            stream.write(json.dumps(previewStates, default=dumper, indent = 2))
+        preview_states = Parser.generateSampleStates()
+        with open(preview_states_path, 'w') as stream:
+            stream.write(json.dumps(preview_states, default=dumper, indent = 2))
             stream.flush()
 
-        return previewStates
+        return preview_states
 
 
     @staticmethod
@@ -375,30 +397,33 @@ class Parser:
         time = datetime.datetime.now()
         states = []
 
-        for i in range(10):
+        for i in range(12):
             num = i + 1
             watchState = WatchState(
-                BatteryLevel = 100 - i * 10,
-                Pulse = 60 + num * 2,
+                BatteryLevel = 0 if i >= 10 else (100 - i * 10),
+                Pulse = 60 + num * 12,
                 Steps = num * 1000,
                 Calories = num * 75,
                 Distance = num * 700,
-                Bluetooth = num > 1 and num < 6,
-                Unlocked = num > 2 and num < 7,
-                Alarm = num > 3 and num < 8,
+                Bluetooth = num < 6,
+                Unlocked = num < 6,
+                Alarm = num < 8,
                 DoNotDisturb = num > 4 and num < 9,
                 CurrentTemperature = -15 + 2 * i,
+                Stand=num,
+                PAI=i*8,
+                Humidity=i*8,
+                UVindex=i,
+                AirQuality=i*41
             )
 
-            if num < 3:
-                watchState.setCurrentWeather(WeatherCondition.Unknown)
-                watchState.setCurrentTemperature(None)
-            else:
-                index = num - 2
-                watchState.setCurrentWeather(index)
-                watchState.setCurrentTemperature(-10 + i * 6)
+            watchState.setCurrentWeather(i)
+            watchState.setCurrentTemperature(-23 + i * 6)
 
-            watchState.setTime(datetime.datetime(year = time.year, month = num, day = num * 2 + 5, hour = i * 2, minute = i * 6, second = i))
+            watchState.setTime(datetime.datetime(year = time.year, month = num, day = num * 2 + 5, hour = i * 2, minute = i * 5, second = i))
+            watchState.setScreenIdle(None)
             states.append(watchState)
 
+        states[-2].setScreenIdle(True)
+        states[-1].setScreenIdle(True)
         return states

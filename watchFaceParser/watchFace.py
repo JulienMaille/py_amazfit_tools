@@ -9,6 +9,7 @@ from watchFaceParser.elements.battery import Battery
 from watchFaceParser.elements.analogDialFace import AnalogDialFace
 from watchFaceParser.elements.unknownType11 import UnknownType11
 from watchFaceParser.elements.unknownType14 import UnknownType14
+from watchFaceParser.elements.unknownType21 import UnknownType21
 from watchFaceParser.elements.shortcuts import Shortcuts
 from watchFaceParser.elements.daysProgress import DaysProgress
 from watchFaceParser.elements.weather import Weather
@@ -29,4 +30,5 @@ class WatchFace:
         14: { 'Name': 'Unknown14', 'Type': UnknownType14},
         15: { 'Name': 'DaysProgress', 'Type': DaysProgress},
         16: { 'Name': 'Shortcuts', 'Type': Shortcuts}, #stargate.bin
+        21: { 'Name': 'Unknown21', 'Type': UnknownType21},
     }

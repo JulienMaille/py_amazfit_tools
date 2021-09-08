@@ -63,6 +63,7 @@ class ResourcesLoader:
 
             imageIndexAttribute = ElementsHelper.getCustomAttributeFor('ImageIndex', propertyInfo) 
             imagesCountAttribute = ElementsHelper.getCustomAttributeFor('ImagesCount', propertyInfo)
+            logging.debug(f"INDEX {imageIndexAttribute,propertyInfo['Name']} '{propertyValue}'")
             print("INDEX",imageIndexAttribute,propertyInfo['Name'],propertyValue)
 
             if imagesCountAttribute != None and imageIndexAttribute != None:
@@ -96,8 +97,9 @@ class ResourcesLoader:
                     for i in range(lastImageIndexValue + 1, lastImageIndexValue + imagesCount):
                         self.loadImage(i)
             else:
-                if lastImageIndexValue and isinstance(propertyValue,list):
-                    print ("DEBUG",lastImageIndexValue,lastImageIndexValue,propertyValue)
+                from watchFaceParser.elements.basicElements.coordinates import Coordinates
+                if lastImageIndexValue and isinstance(propertyValue,list) and propertyType == Coordinates:
+                    print ("DEBUG", lastImageIndexValue, lastImageIndexValue, propertyType, len(propertyValue), propertyValue)
                     for i in range(lastImageIndexValue+1, lastImageIndexValue+len(propertyValue)):
                         self.loadImage(i)   
                 if imagesCountAttribute == None and imageIndexAttribute == None:

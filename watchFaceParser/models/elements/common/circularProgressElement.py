@@ -7,11 +7,11 @@ class CircularProgressElement(CoordinatesElement):
     def __init__(self, parameter, parent, name = None):
         self._radiusX = None
         self._radiusY = None
-        self._startAngle = None
-        self._endAngle = None
-        self._width = None
+        self._startAngle = 0
+        self._endAngle = 0
+        self._width = 0
         self._color = None
-        self._flatness = None
+        self._flatness = 0
         self._imageIndex = None
         super(CircularProgressElement, self).__init__(parameter = parameter, parent = parent, name = name)
 
@@ -54,6 +54,8 @@ class CircularProgressElement(CoordinatesElement):
             value = total
         sectorAngle = int(1.0 * (self.getEndAngle() - self.getStartAngle()) * value / total)
 
+        if not self._radiusX:
+            return
         #print ("_imageIndex",self._imageIndex)
         if self._imageIndex:
             temp = resources[self._imageIndex].getBitmap()

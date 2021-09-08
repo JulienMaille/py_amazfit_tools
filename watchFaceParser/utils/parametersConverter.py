@@ -11,6 +11,7 @@ from watchFaceParser.models.gtr2.timeType import TimeType
 from watchFaceParser.models.gtr2.dateType import DateType
 from watchFaceParser.models.gtr2.combingModeType import CombingModeType
 from watchFaceParser.models.gtr2.digitType import DigitType
+from watchFaceParser.models.gtr2.imageprogressDisplayType import ImageProgressDisplayType
 from watchFaceParser.models.gtr2.langCodeType import LangCodeType
 from watchFaceParser.models.gtr2.textAlignment import TextAlignmentGTR2
 from watchFaceParser.models.gtr2.activityType import ActivityType
@@ -55,8 +56,23 @@ class ParametersConverter:
 
             if propertyValue is None:
                 continue
-           
-            if propertyType == 'long' or propertyType == 'int' or propertyType == 'long?' or propertyType == 'float' or propertyType == TextAlignment or propertyType == DigitType or propertyType == TextAlignmentGTR2 or propertyType == ActivityType or propertyType == Color or propertyType == LangCodeType or propertyType == TimeType or propertyType == DateType or propertyType == CombingModeType or propertyType == 'bool':
+            if ( 
+                    propertyType == 'int' or 
+                    propertyType == 'long' or 
+                    propertyType == 'long?' or 
+                    propertyType == 'float' or 
+                    propertyType == TextAlignment or 
+                    propertyType == TextAlignmentGTR2 or 
+                    propertyType == ActivityType or 
+                    propertyType == Color or 
+                    propertyType == LangCodeType or 
+                    propertyType == TimeType or 
+                    propertyType == DigitType or 
+                    propertyType == ImageProgressDisplayType or 
+                    propertyType == DateType or 
+                    propertyType == CombingModeType or 
+                    propertyType == 'bool'
+                ):
                 value = propertyValue
                 flags = None
                 if propertyType == 'bool' or type(propertyValue) == bool:
@@ -75,6 +91,10 @@ class ParametersConverter:
                     value = ActivityType.fromJSON(propertyValue)
                 elif propertyType == TimeType:
                     value = TimeType.fromJSON(propertyValue)
+                elif propertyType == DigitType:
+                    value = DigitType.fromJSON(propertyValue)
+                elif propertyType == ImageProgressDisplayType:
+                    value = ImageProgressDisplayType.fromJSON(propertyValue)
                 elif propertyType == DateType:
                     value = DateType.fromJSON(propertyValue)
                 elif propertyType == CombingModeType:
@@ -165,6 +185,16 @@ class ParametersConverter:
         return childIsList
 
     @staticmethod
+    def listParams(descriptor, path = ""):
+        for parameter in descriptor:
+            parameterId = parameter.getId()
+            currentPath = str(parameterId) if not path else path + '.' + str(parameterId)
+            logging.debug(f"{currentPath} Value: {parameter.getValue()}")
+            if ( parameter.getChildren() is not None):
+                for x in parameter.getChildren():
+                    ParametersConverter.listParams([x], currentPath)
+
+    @staticmethod
     def parse(paramType, descriptor, path = ""):
         assert(type(descriptor) == type([]))
         assert(type(path) == type(""))
@@ -211,6 +241,8 @@ class ParametersConverter:
                 setattr(result, propertyInfoName, CombingModeType(parameter.getValue()))
             elif propertyType == DigitType:
                 setattr(result, propertyInfoName, DigitType(parameter.getValue()))
+            elif propertyType == ImageProgressDisplayType:
+                setattr(result, propertyInfoName, ImageProgressDisplayType(parameter.getValue()))
             elif propertyType == LangCodeType:
                 setattr(result, propertyInfoName, LangCodeType(parameter.getValue()))
             elif propertyType == Color:
