@@ -94,7 +94,7 @@ class Reader():
                 firstByte = rowBytes[i * self._step]
                 secondByte = rowBytes[i * self._step + 1]
                 r = (secondByte >> 3) << 3
-                g = (((firstByte >> 5) & 0x7) | ((secondByte & 0x7) << 2)) << 3
+                g = ((firstByte >> 6) | ((secondByte & 0x7) << 2)) << 3
                 b = (firstByte & 0x1f) << 3
                 alpha = 255
                 color = resources.image.color.Color.fromArgb(alpha, r, g, b)
@@ -115,7 +115,7 @@ class Reader():
                 secondByte = rowBytes[x * self._step + 1]
                 alpha = 255
                 r = (secondByte >> 3) << 3
-                g = (((firstByte >> 5) & 0x7) | ((secondByte & 0x7) << 2)) << 3
+                g = ((firstByte >> 6) | ((secondByte & 0x7) << 2)) << 3
                 b = (firstByte & 0x1f) << 3
 
                 color = resources.image.color.Color.fromArgb(alpha, r, g, b)
