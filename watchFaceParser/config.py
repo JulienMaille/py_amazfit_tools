@@ -5,6 +5,7 @@ class Config:
     _is_gtr2 = False
     _is_gts = False
     _is_gts2 = False
+    _is_gts2_mini = False
     _is_trex = False
     _is_trexpro = False
     _is_amazfitx = False
@@ -17,6 +18,7 @@ class Config:
     _is_to_raw = False
     _is_from_raw = False
 
+    _size_gts2_mini = (306, 354)
     _size_gtr_47 = (454, 454)
     _size_gtr_42 = (390, 390)
     _size_trex = (360, 360)
@@ -57,6 +59,9 @@ class Config:
             elif deviceId == 0x53:
                 print("Detected TrexPro")
                 Config.setTrexProMode(True)
+            elif deviceId == 0x49:
+                print("Detected GTS2 Mini")
+                Config.setGts2MiniMode(True)
     @staticmethod
     def setToRaw(val):
         Config._is_to_raw = val 
@@ -80,6 +85,14 @@ class Config:
             Config._is_amazfitx = True
             Config._preview_size = (152, 472)
 
+
+    @staticmethod
+    def setGts2MiniMode(gts):
+        Config._is_gts2_mini = gts
+        if gts:
+            Config._autodetect = False
+            Config._image_size = Config._size_gts2_mini
+            Config._preview_size = (210, 242)
 
     @staticmethod
     def setGtrMode(gtr):
@@ -118,6 +131,10 @@ class Config:
     @staticmethod
     def isGtr2Mode():
         return Config._is_gtr2
+
+    @staticmethod
+    def isGts2MiniMode():
+        return Config._is_gts2_mini
 
     @staticmethod
     def isGts2Mode():

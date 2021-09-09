@@ -1,10 +1,14 @@
 class CombingModeType:
+    Unkknown2 = 2
+    Unkknown_1 = -1
     Single = 1
     Follow = 0
 
     Converter = {
         Single : "Single",
         Follow : "Follow", 
+        Unkknown_1 : "Unkknown_1", 
+        Unkknown2 : "Unkknown2", 
     }
 
     def __init__(self, flag):

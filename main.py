@@ -13,6 +13,7 @@ if __name__ == '__main__':
     parser.add_argument('--gtr2', type=int, choices=[42,47], help='force GTR2 watchface')
     parser.add_argument('--gts', action='store_true', help='force GTS watchface')
     parser.add_argument('--gts2', action='store_true', help='force GTS2 watchface')
+    parser.add_argument('--gts2mini', action='store_true', help='force GTS2 mini watchface')
     parser.add_argument('--trexpro', action='store_true', help='force TRexPro watchface')
     parser.add_argument('--oldformat', action='store_true', help='force old json format for GTS2 or GTR2')
     parser.add_argument('--trex', action='store_true', help='force T-REX watchface')
@@ -25,6 +26,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     Config.setVergeLiteMode(args.vergelite)
+    Config.setGts2MiniMode(args.gts2mini)
     Config.setGtrMode(args.gtr)
     Config.setGtrMode2(args.gtr2, args.oldformat)
     Config.setGtsMode(args.gts)

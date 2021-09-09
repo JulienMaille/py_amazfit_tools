@@ -28,7 +28,13 @@ class Header:
             Header.headerSize = 88
             Header.unknownPos = 76
             Header.parametersSizePos = 80 
-            self.signature = b"UIHH\x02\x00\xff"
+            self.signature = b"UIHH\x02\x00\xff" 
+            val_11 = 0x01
+        elif Config.isGts2MiniMode():
+            Header.headerSize = 87
+            Header.unknownPos = 75
+            Header.parametersSizePos = 73  
+            self.signature = b"UIHH\x01\x00\xff"
             val_11 = 0x01
         else:
             Header.headerSize = 64
@@ -112,7 +118,11 @@ class Header:
         elif Config.isGtr2Mode() or Config.isGts2Mode() or Config.isTrexProMode() :
             Header.headerSize = 88 - 16
             Header.unknownPos = 76 - 16
-            Header.parametersSizePos = 80 - 16
+            Header.parametersSizePos = 80 - 16 
+        elif Config.isGts2MiniMode():
+            Header.headerSize = 87 - 16
+            Header.unknownPos = 75 - 16
+            Header.parametersSizePos = 83 - 16 
         else:
             Header.headerSize = 64 - 16
             Header.unknownPos = 52 - 16
@@ -120,6 +130,8 @@ class Header:
 
         if Config.isGtr2Mode() or Config.isGts2Mode() or Config.isTrexProMode():
            Header.dialSignature = b"UIHH\x02\x00\xff"
+        elif Config.isGts2MiniMode():
+             Header.dialSignature = b"UIHH\x01\x00\xff"
 
         buffer = stream.read(Header.headerSize)
         header = Header(
