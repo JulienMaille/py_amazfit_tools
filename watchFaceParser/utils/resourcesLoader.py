@@ -97,7 +97,7 @@ class ResourcesLoader:
                     for i in range(lastImageIndexValue + 1, lastImageIndexValue + imagesCount):
                         self.loadImage(i)
             else:
-                from watchFaceParser.elements.basicElements.coordinates import Coordinates
+                from watchFaceParser.elements.gts2mini.basicElements.coordinates import Coordinates
                 if lastImageIndexValue and isinstance(propertyValue,list) and propertyType == Coordinates:
                     print ("DEBUG", lastImageIndexValue, lastImageIndexValue, propertyType, len(propertyValue), propertyValue)
                     for i in range(lastImageIndexValue+1, lastImageIndexValue+len(propertyValue)):
