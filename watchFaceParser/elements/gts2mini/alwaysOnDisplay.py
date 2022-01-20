@@ -40,6 +40,7 @@ class AoDAnalogDialFace:
 class AoDTimeExtended:
     definitions = {
         1: {'Name': 'TimeSeparateDigits', 'Type': AoDTimeSeparateDigits},
+        # 2:
         3: {'Name': 'TimeAnalog', 'Type': AoDAnalogDialFace},
         4: {'Name': 'AmPm', 'Type': AmPmIcon},
         5: {'Name': 'TimeDigital', 'Type': AoDTimeDigital},
