@@ -72,7 +72,7 @@ class AlarmTimeElement(ContainerElement):
             return ValueElement(parameter, self, 'PaddingZeroMinutes')
         elif parameterId == 9:
             from watchFaceParser.models.gts2mini.elements.common.coordinatesElement import CoordinatesElement
-            self._data_type_hours_coordinates = CoordinatesElement(parameter=parameter, parent=self, name='DataTypeHoursCoordinates')
+            self._data_type_hours_coordinates = CoordinatesElement(parameter=parameter, parent=self, name='HoursDataTypeCoordinates')
             return self._minutes
         elif parameterId == 10:
             pass

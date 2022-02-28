@@ -10,7 +10,7 @@ class Time:
         5: { 'Name': 'PaddingZeroSeconds', 'Type': 'bool'},
         6: { 'Name': 'MinutesDataTypeImageIndex', 'Type': 'long'},
         7: { 'Name': 'SecondsDataTypeImageIndex', 'Type': 'long'},
-        8: { 'Name': 'MinutesFollowHours', 'Type': 'bool'},
+        8: { 'Name': 'MinutesFollowHours', 'Type': 'bool'}, # if set to true, seconds will only show if they follow minutes
         9: { 'Name': 'SecondsFollowMinutes', 'Type': 'bool'},
         10: { 'Name': 'HoursDataTypeCoordinates', 'Type': Coordinates}, # needed only when MinutesFollowHours == False
         11: { 'Name': 'MinutesDataTypeCoordinates', 'Type': Coordinates}, # needed only when SecondsFollowMinutes == False
