@@ -12,15 +12,15 @@ class UviProgressElement(ContainerElement):
         super(UviProgressElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
     def draw3(self, drawer, resources, state):
-        maximal = 100
+        maximal = 12
         if self._image_progress:
-            self._image_progress.draw4(drawer, resources, state.getHumidity(), maximal)
+            self._image_progress.draw4(drawer, resources, state.getUVindex(), maximal)
         if self._iconset_progress:
-            self._iconset_progress.draw4(drawer, resources, state.getHumidity(), maximal)
+            self._iconset_progress.draw4(drawer, resources, state.getUVindex(), maximal)
         if self._circle_scale:
-            self._circle_scale.draw4(drawer, resources, state.getHumidity(), maximal)
+            self._circle_scale.draw4(drawer, resources, state.getUVindex(), maximal)
         if self._scale:
-            self._scale.draw4(drawer, resources, state.getHumidity(), maximal)
+            self._scale.draw4(drawer, resources, state.getUVindex(), maximal)
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()

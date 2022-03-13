@@ -43,5 +43,5 @@ class PaiProgressElement(ContainerElement):
         elif parameterId == 8:
             pass
         else:
-            print ("Unknown HumidityProgressElement",parameterId)
+            print ("Unknown PaiProgressElement",parameterId)
             return super(PaiProgressElement, self).createChildForParameter(parameter)
