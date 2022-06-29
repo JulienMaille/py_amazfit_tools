@@ -41,4 +41,24 @@ class CompositeElement(Element):
                 t.append(child)
             except AttributeError:
                 pass
+
+        def getIndex(id):
+            for index, x in enumerate(t):
+                if x._id == id:
+                    return index
+            return -1
+
+        def order(id1, id2):
+            idx1 = getIndex(id1)
+            idx2 = getIndex(id2)
+            if( idx1 < idx2 ):
+                t[idx1], t[idx2] = t[idx2], t[idx1]
+        # make sure Activity(4) is after Progress elements (7, 9, 15)
+        # make sure DateBlock(5) is after Progress elements (7, 9, 15)
+        # make sure AnalogDial(20) is after Digital Dial (21)
+        order(4, 7)
+        order(4, 9)
+        order(4, 15)
+        order(20, 21)
+
         return t
