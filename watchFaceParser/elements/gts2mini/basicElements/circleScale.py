@@ -10,6 +10,6 @@ class CircleScale:
         6: { 'Name': 'EndAngle', 'Type': 'long'},
         7: { 'Name': 'Width', 'Type': 'long'},
         8: { 'Name': 'Color', 'Type': Color},
-        9: { 'Name': 'Flatness', 'Type': 'long'}, #verge
+        9: { 'Name': 'Flatness', 'Type': 'long'}, # not working
        10: { 'Name': 'ImageIndex', 'Type': 'long'}, #gts circle.bin
     }

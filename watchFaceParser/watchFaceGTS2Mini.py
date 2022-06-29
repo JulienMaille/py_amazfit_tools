@@ -27,13 +27,13 @@ class WatchFace:
         7: {'Name': 'StepProgress', 'Type': Progress},
         8: {'Name': 'Status', 'Type': Status},
         9: {'Name': 'Battery', 'Type': Battery},
-        10: {'Name': 'Unknown10', 'Type': 'long?'},
+        #10: {'Name': 'Unknown10', 'Type': 'long?'}, # not Progress, shows nothing
         11: {'Name': 'Animation', 'Type': Animation},
         12: {'Name': 'HeartProgress', 'Type': Progress},
-        #13: {'Name': 'Unknown13', 'Type': 'long?'},
+        #13: {'Name': 'Unknown13', 'Type': 'long?'}, # not Progress, show a chinese character
         14: {'Name': 'WeekDayImages', 'Type': WeekDayImages}, #56bda72eb651d3cba751c9453203bd44.bin
         15: {'Name': 'CaloriesProgress', 'Type': Progress},
-        #16: {'Name': 'Unknown16', 'Type': 'long?'},
+        #16: {'Name': 'Unknown16', 'Type': Progress},  # Progress but for unknown parameter
         17: {'Name': 'HumidityProgress', 'Type': ProgressAlt3},
         18: {'Name': 'Alarm', 'Type': Alarm},
         19: {'Name': 'Shortcuts', 'Type': Shortcuts},
