@@ -17,7 +17,7 @@ class YearMonthAndDay:
         11: {'Name': 'DelimiterYearImageIndex', 'Type': 'long'},
         12: {'Name': 'DelimiterMonthImageIndex', 'Type': 'long'},
         13: {'Name': 'DelimiterDayImageIndex', 'Type': 'long'},
-        14: {'Name': 'DelimiterYearCoordinates', 'Type': Coordinates},
-        15: {'Name': 'DelimiterMonthCoordinates', 'Type': Coordinates},
-        16: {'Name': 'DelimiterDayCoordinates', 'Type': Coordinates},
+        14: {'Name': 'YearDataTypeCoordinates', 'Type': Coordinates}, # Datatype coords
+        15: {'Name': 'MonthDataTypeCoordinates', 'Type': Coordinates}, # Datatype coords
+        16: {'Name': 'DayDataTypeCoordinates', 'Type': Coordinates}, # Datatype coords
     }

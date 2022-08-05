@@ -17,9 +17,9 @@ class YearMonthAndDayElement(ContainerElement):
         self._delimiter_year = None
         self._delimiter_month = None
         self._delimiter_day = None
-        self._delimiter_year_coords = None
-        self._delimiter_month_coords = None
-        self._delimiter_day_coords = None
+        self._datetype_year_coords = None
+        self._datetype_month_coords = None
+        self._datetype_day_coords = None
         super(YearMonthAndDayElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
     def draw4(self, drawer, images, state,
@@ -33,10 +33,10 @@ class YearMonthAndDayElement(ContainerElement):
             if self._year_data_type:
                 if self._month_follow_year:
                     followxy = self.drawDelimiter(drawer, images, self._year_data_type, followxy[0], followxy[1])
-                elif self._delimiter_year_coords:
+                elif self._datetype_year_coords:
                     self.drawDelimiter(drawer, images, self._year_data_type,
-                                       self._delimiter_year_coords.getX(),
-                                       self._delimiter_year_coords.getY())
+                                       self._datetype_year_coords.getX(),
+                                       self._datetype_year_coords.getY())
 
         if self._month:
             followxy = self._month.draw4(drawer, images, state.getTime().month, 2,
@@ -46,10 +46,10 @@ class YearMonthAndDayElement(ContainerElement):
             if self._month_data_type:
                 if self._day_follow_month:
                     followxy = self.drawDelimiter(drawer, images, self._month_data_type, followxy[0], followxy[1])
-                elif self._delimiter_month_coords:
+                elif self._datetype_month_coords:
                     self.drawDelimiter(drawer, images, self._month_data_type,
-                                       self._delimiter_month_coords.getX(),
-                                       self._delimiter_month_coords.getY())
+                                       self._datetype_month_coords.getX(),
+                                       self._datetype_month_coords.getY())
 
         if self._day:
             followxy = self._day.draw4(drawer, images, state.getTime().day, 2,
@@ -59,10 +59,10 @@ class YearMonthAndDayElement(ContainerElement):
             if self._day_data_type:
                 if self._day_follow_month:
                     followxy = self.drawDelimiter(drawer, images, self._day_data_type, followxy[0], followxy[1])
-                elif self._delimiter_day_coords:
+                elif self._datetype_day_coords:
                     self.drawDelimiter(drawer, images, self._day_data_type,
-                                       self._delimiter_day_coords.getX(),
-                                       self._delimiter_day_coords.getY())
+                                       self._datetype_day_coords.getX(),
+                                       self._datetype_day_coords.getY())
 
         if self._month_as_word:
             self._month_as_word.draw3(drawer, images, state.getTime().month)
@@ -120,16 +120,16 @@ class YearMonthAndDayElement(ContainerElement):
             return ValueElement(parameter, self, 'DelimiterDayImageIndex')
         elif parameterId == 14:
             from watchFaceParser.models.gts2mini.elements.common.coordinatesElement import CoordinatesElement
-            self._delimiter_year_coords = CoordinatesElement(parameter=parameter, parent=self, name='DelimiterYearCoordinates')
-            return self._delimiter_year_coords
+            self._datetype_year_coords = CoordinatesElement(parameter=parameter, parent=self, name='YearDataTypeCoordinates')
+            return self._datetype_year_coords
         elif parameterId == 15:
             from watchFaceParser.models.gts2mini.elements.common.coordinatesElement import CoordinatesElement
-            self._delimiter_month_coords = CoordinatesElement(parameter=parameter, parent=self, name='DelimiterMonthCoordinates')
-            return self._delimiter_month_coords
+            self._datetype_month_coords = CoordinatesElement(parameter=parameter, parent=self, name='MonthDataTypeCoordinates')
+            return self._datetype_month_coords
         elif parameterId == 16:
             from watchFaceParser.models.gts2mini.elements.common.coordinatesElement import CoordinatesElement
-            self._delimiter_day_coords = CoordinatesElement(parameter=parameter, parent=self, name='DelimiterDayCoordinates')
-            return self._delimiter_day_coords
+            self._datetype_day_coords = CoordinatesElement(parameter=parameter, parent=self, name='DayDataTypeCoordinates')
+            return self._datetype_day_coords
         else:
-            return super(MonthAndDayElement, self).createChildForParameter(parameter)
+            return super(YearMonthAndDayElement, self).createChildForParameter(parameter)
 
