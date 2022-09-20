@@ -15,7 +15,7 @@ class UvindexElement(CompositeElement):
         assert(type(resources) == list)
 
         if self._number:
-            self._number.draw4(drawer, resources, state.getHumidity(), suffix = self._suffix)
+            self._number.draw4(drawer, resources, state.getUVindex(), suffix = self._suffix)
 
         if self._image:
             self._image.draw3(drawer, resources, state)
@@ -27,14 +27,16 @@ class UvindexElement(CompositeElement):
             from watchFaceParser.models.gts2mini.elements.common.numberElement import NumberElement
             self._number = NumberElement(parameter, self, 'UVindexNumber')
             return self._number
-        if parameterId == 2:
+        elif parameterId == 2:
             from watchFaceParser.models.gts2mini.elements.basic.valueElement import ValueElement
             self._suffix = parameter.getValue()
             return ValueElement(parameter, self, 'SuffixImageIndex')
-        if parameterId == 9:
+        elif parameterId == 3:  # Shortcut
+            pass
+        elif parameterId == 9:
             from watchFaceParser.models.gts2mini.elements.common.imageElement import ImageElement
             self._image = ImageElement(parameter, self, 'UVindexIcon')
             return self._image
         else:
-            print ("Unknown HumidityElement",parameterId)
+            print ("Unknown UVindexElement",parameterId)
             super(UvindexElement, self).createChildForParameter(parameter)

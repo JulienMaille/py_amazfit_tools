@@ -401,17 +401,17 @@ class Parser:
             num = i + 1
             watchState = WatchState(
                 BatteryLevel = 0 if i >= 10 else (100 - i * 10),
-                Pulse = 60 + num * 12,
+                Pulse = 60 + i * 12,
                 Steps = num * 1000,
                 Calories = num * 75,
-                Distance = num * 700,
+                Distance = num * 70,
                 Bluetooth = num < 6,
                 Unlocked = num < 6,
                 Alarm = num < 8,
                 DoNotDisturb = num > 4 and num < 9,
-                CurrentTemperature = -15 + 2 * i,
+                CurrentTemperature = -15 + 6 * i,
                 Stand=num,
-                PAI=i*8,
+                PAI=num*9,
                 Humidity=i*8,
                 UVindex=i,
                 AirQuality=i*41,
@@ -419,7 +419,7 @@ class Parser:
             )
 
             watchState.setCurrentWeather(i)
-            watchState.setCurrentTemperature(-23 + i * 6)
+            watchState.setCurrentTemperature(-15 + i * 6)
 
             watchState.setTime(datetime.datetime(year = time.year, month = num, day = num * 2 + 5, hour = i * 2, minute = i * 5, second = i))
             watchState.setScreenIdle(None)
