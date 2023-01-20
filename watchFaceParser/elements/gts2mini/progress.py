@@ -3,6 +3,7 @@ from watchFaceParser.elements.gts2mini.basicElements.imageSet import ImageSet
 from watchFaceParser.elements.gts2mini.basicElements.iconSet import IconSet
 from watchFaceParser.elements.gts2mini.basicElements.scale import Scale
 from watchFaceParser.elements.gts2mini.basicElements.circleScale import CircleScale
+from watchFaceParser.elements.gts2mini.basicElements.pointerScale import PointerScale
 
 class Progress:
     definitions = {
@@ -16,9 +17,16 @@ class Progress:
         8: {'Name': 'UnknownImage', 'Type': Image}, # 5bd18e5a9f7568d42f984fe540d992e9.bin
     }
 
+class Alt1PointerScale:
+    definitions = {
+        1: {'Name': 'PointerScale', 'Type': PointerScale},
+    }
+
 class ProgressAlt1:
     definitions = {
+        1: {'Name': 'PointerScale', 'Type': PointerScale},
         2: {'Name': 'ImageProgress', 'Type': ImageSet},
+        4: {'Name': 'Alt1PointerScale', 'Type': Alt1PointerScale},
         6: {'Name': 'NoDataImage', 'Type': Image},
     }
 
