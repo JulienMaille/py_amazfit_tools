@@ -17,6 +17,7 @@ if __name__ == '__main__':
     parser.add_argument('--oldformat', action='store_true', help='force old json format for GTS2 or GTR2')
     parser.add_argument('--gts2mini', action='store_true', help='force GTS2 Mini watchface')
     parser.add_argument('--bipu', action='store_true', help='force Bip U watchface')
+    parser.add_argument('--bip3', action='store_true', help='force Bip 3 watchface')
     parser.add_argument('--trex', action='store_true', help='force T-REX watchface')
     parser.add_argument('--x', action='store_true', help='force AmazfitX watchface')
     parser.add_argument('--file', nargs='+', help='''watchface.bin - unpacks watchface images and config
@@ -37,6 +38,7 @@ if __name__ == '__main__':
     Config.setTrexProMode(args.trexpro, args.oldformat)
     Config.setAmazfitXMode(args.x)
     Config.setBipUMode(args.bipu)
+    Config.setBip3Mode(args.bip3)
 
     Config.setToRaw(args.to_raw)
     Config.setFromRaw(args.from_raw)
