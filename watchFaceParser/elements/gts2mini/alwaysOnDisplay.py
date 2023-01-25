@@ -25,8 +25,8 @@ class AoDTimeDigital: # similar to class AlarmTime?
         6: {'Name': 'DelimiterMinutesImageIndex', 'Type': 'long'},
         7: {'Name': 'PaddingZeroHours', 'Type': 'bool'},
         8: {'Name': 'PaddingZeroMinutes', 'Type': 'bool'},
-        9: {'Name': 'DataTypeHoursCoordinates', 'Type': Coordinates},
-        10: {'Name': 'DataTypeMinutesCoordinates', 'Type': Coordinates},
+        9: {'Name': 'HoursDataTypeCoordinates', 'Type': Coordinates},
+        10: {'Name': 'MinutesDataTypeCoordinates', 'Type': Coordinates},
         11: {'Name': 'MinutesFollowHours', 'Type': 'bool'},
     }
 
@@ -40,7 +40,8 @@ class AoDAnalogDialFace:
 class AoDTimeExtended:
     definitions = {
         1: {'Name': 'TimeSeparateDigits', 'Type': AoDTimeSeparateDigits},
-        3: {'Name': 'TimeAnalog', 'Type': AoDAnalogDialFace},
+        # 2:
+        3: {'Name': 'TimeAnalog', 'Type': AoDAnalogDialFace}, # incompatible with AoDTimeSeparateDigits and TimeDigital
         4: {'Name': 'AmPm', 'Type': AmPmIcon},
         5: {'Name': 'TimeDigital', 'Type': AoDTimeDigital},
     }

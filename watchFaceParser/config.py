@@ -10,6 +10,7 @@ class Config:
     _is_trexpro = False
     _is_amazfitx = False
     _is_bip_u = False
+    _is_bip_3 = False
     _image_size = (360, 360)
     _preview_size = (210, 210)
     _autodetect = True
@@ -26,6 +27,7 @@ class Config:
     _size_gtsmini = (306,354)
     _size_amazfitx = (206,640)
     _size_bip_u = (302, 320)
+    _size_bip_3 = (240, 280)
     _oldformat = False
 
     _border_alignment = False
@@ -64,6 +66,9 @@ class Config:
             elif deviceId == 0x45:
                 print("Detected GTS2 Mini")
                 Config.setGts2MiniMode(True)
+            elif deviceId == 0x47:
+                print("Detected Bip 3")
+                Config.setBip3Mode(True)
     @staticmethod
     def setToRaw(val):
         Config._is_to_raw = val 
@@ -234,6 +239,16 @@ class Config:
             Config._is_bip_u = 40
             Config._image_size = Config._size_bip_u
             Config._preview_size = (202, 214)
+            Config._startImageIndex = 0
+            Config._oldformat = True
+
+    @staticmethod
+    def setBip3Mode(bip3):
+        if bip3:
+            Config._autodetect = False
+            Config._is_bip_u = 40
+            Config._image_size = Config._size_bip_3
+            Config._preview_size = (148, 173)
             Config._startImageIndex = 0
             Config._oldformat = True
 

@@ -30,5 +30,5 @@ class HourlyImage:
 
 class HourlyImages:
     definitions = {
-        1: {'Name': 'HourlyImage', 'Type': HourlyImage},
+        1: {'Name': 'HourlyImage', 'Type': HourlyImage}, # limited to 24 images?
     }

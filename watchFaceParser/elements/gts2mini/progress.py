@@ -3,22 +3,30 @@ from watchFaceParser.elements.gts2mini.basicElements.imageSet import ImageSet
 from watchFaceParser.elements.gts2mini.basicElements.iconSet import IconSet
 from watchFaceParser.elements.gts2mini.basicElements.scale import Scale
 from watchFaceParser.elements.gts2mini.basicElements.circleScale import CircleScale
+from watchFaceParser.elements.gts2mini.basicElements.pointerScale import PointerScale
 
 class Progress:
     definitions = {
         #1: {'Name': 'Unknown1', 'Type': 'long?'}, #Text ?
         2: {'Name': 'ImageProgress', 'Type': ImageSet},
         3: {'Name': 'IconSetProgress', 'Type': IconSet},
-        4: {'Name': 'CircleScale', 'Type': CircleScale},
+        4: {'Name': 'CircleScale', 'Type': CircleScale}, # will work for StepProgress and CaloriesProgress only
         #5: {'Name': 'Unknown5', 'Type': 'long?'},
         6: {'Name': 'Scale', 'Type': Scale},
         7: {'Name': 'NoDataImage', 'Type': Image},
         8: {'Name': 'UnknownImage', 'Type': Image}, # 5bd18e5a9f7568d42f984fe540d992e9.bin
     }
 
+class Alt1PointerScale:
+    definitions = {
+        1: {'Name': 'PointerScale', 'Type': PointerScale},
+    }
+
 class ProgressAlt1:
     definitions = {
+        1: {'Name': 'PointerScale', 'Type': PointerScale},
         2: {'Name': 'ImageProgress', 'Type': ImageSet},
+        4: {'Name': 'Alt1PointerScale', 'Type': Alt1PointerScale},
         6: {'Name': 'NoDataImage', 'Type': Image},
     }
 

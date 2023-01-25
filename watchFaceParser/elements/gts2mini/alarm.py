@@ -12,7 +12,7 @@ class AlarmTime:
         6: { 'Name': 'DelimiterMinutesImageIndex', 'Type': 'long'},
         7: { 'Name': 'PaddingZeroHours', 'Type': 'bool'},
         8: { 'Name': 'PaddingZeroMinutes', 'Type': 'bool'},
-        9: { 'Name': 'DataTypeHoursCoordinates', 'Type': Coordinates}, # needed only when MinutesFollowHours == False
+        9: { 'Name': 'HoursDataTypeCoordinates', 'Type': Coordinates}, # needed only when MinutesFollowHours == False
         11: { 'Name': 'MinutesFollowHours', 'Type': 'bool'},
     }
 
