@@ -54,11 +54,17 @@ class CompositeElement(Element):
             if( idx1 < idx2 ):
                 t[idx1], t[idx2] = t[idx2], t[idx1]
         # make sure Activity(4) is after Progress elements (7, 9, 15)
-        # make sure DateBlock(5) is after Progress elements (7, 9, 15)
-        # make sure AnalogDial(20) is after Digital Dial (21)
         order(4, 7)
         order(4, 9)
         order(4, 15)
+        # make sure DateBlock(5) is after Progress elements (7, 9, 15)
+        # make sure AnalogDial(20) is after Digital Dial (21)
         order(20, 21)
+        # make sure TimeExtended(3), DateBlock(5), Weather(6), Steps(7) and Battery(9) is after Status (8)
+        order(3, 8)
+        order(5, 8)
+        order(6, 8)
+        order(7, 8)
+        order(9, 8)
 
         return t
