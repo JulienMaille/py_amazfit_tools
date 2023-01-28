@@ -9,6 +9,7 @@ class DateElement(CompositeElement):
         self._delimiter = None
         self._padding_zero_month = None
         self._padding_zero_day = None
+        self._day_follow_month = None
         super(DateElement, self).__init__(parameters=None, parameter=parameter, parent=parent, name=name)
 
     def draw3(self, drawer, images, state):
@@ -20,9 +21,9 @@ class DateElement(CompositeElement):
                                          suffix = self._delimiter)
 
         if self._day:
-            followxy = self._day.draw4(drawer, images, state.getTime().day, 2,
-                                       force_padding = self._padding_zero_day,
-                                       followxy = followxy)
+            self._day.draw4(drawer, images, state.getTime().day, 2,
+                            force_padding = self._padding_zero_day,
+                            followxy = followxy if self._day_follow_month else None)
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
@@ -48,6 +49,9 @@ class DateElement(CompositeElement):
             self._padding_zero_day = parameter.getValue()
             return ValueElement(parameter, self, 'PaddingZeroDay')
         elif parameterId == 11:
+            from watchFaceParser.models.gts2mini.elements.basic.valueElement import ValueElement
+            self._day_follow_month = parameter.getValue()
+            return ValueElement(parameter, self, 'DayFollowsMonth')
             pass
         else:
             super(DateElement, self).createChildForParameter(parameter)
