@@ -9,7 +9,17 @@ class DateBlockElement(ContainerElement):
         self._ampm = None
         self._weekDay = None
         self._weekDayProgress = None
+        self._weekDayPointerScale = None
         super(DateBlockElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
+
+    def draw3(self, drawer, images, state):
+        assert(type(images) == list)
+
+        for element in self.getDrawableChildren():
+            element.draw3(drawer, images, state)
+
+        if self._weekDayPointerScale:
+            self._weekDayPointerScale.draw4(drawer, images, state.getTime().weekday(), 6)
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
@@ -35,5 +45,9 @@ class DateBlockElement(ContainerElement):
             from watchFaceParser.models.gts2mini.elements.date.weekDayProgressElement import WeekDayProgressElement
             self._weekDayProgress = WeekDayProgressElement(parameter=parameter, parent=self, name='WeekdayProgress')
             return self._weekDayProgress
+        elif parameterId == 8:
+            from watchFaceParser.models.gts2mini.elements.common.scaleElement import ScaleElement
+            self._weekDayPointerScale = ScaleElement(parameter=parameter, parent=self, name='WeekdayPointerScale')
+            return self._weekDayPointerScale
         else:
             return super(DateBlockElement, self).createChildForParameter(parameter)

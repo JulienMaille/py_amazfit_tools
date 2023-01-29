@@ -6,7 +6,8 @@ class DateElement(CompositeElement):
     def __init__(self, parameter, parent, name=None):
         self._month = None
         self._day = None
-        self._delimiter = None
+        self._delimiter_month = None
+        self._delimiter_day = None
         self._padding_zero_month = None
         self._padding_zero_day = None
         self._day_follow_month = None
@@ -18,12 +19,13 @@ class DateElement(CompositeElement):
             followxy = self._month.draw4(drawer, images, state.getTime().month, 2,
                                          force_padding = self._padding_zero_month,
                                          followxy = None,
-                                         suffix = self._delimiter)
+                                         suffix = self._delimiter_month)
 
         if self._day:
             self._day.draw4(drawer, images, state.getTime().day, 2,
                             force_padding = self._padding_zero_day,
-                            followxy = followxy if self._day_follow_month else None)
+                            followxy = followxy if self._day_follow_month else None,
+                            suffix = self._delimiter_day)
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
@@ -38,8 +40,12 @@ class DateElement(CompositeElement):
             return self._day
         elif parameterId == 5:
             from watchFaceParser.models.gts2mini.elements.basic.valueElement import ValueElement
-            self._delimiter = parameter.getValue()
+            self._delimiter_month = parameter.getValue()
             return ValueElement(parameter, self, 'DelimiterMonthImageIndex')
+        elif parameterId == 6:
+            from watchFaceParser.models.gts2mini.elements.basic.valueElement import ValueElement
+            self._delimiter_day = parameter.getValue()
+            return ValueElement(parameter, self, 'DelimiterDayImageIndex')
         elif parameterId == 7:
             from watchFaceParser.models.gts2mini.elements.basic.valueElement import ValueElement
             self._padding_zero_month = parameter.getValue()
