@@ -42,7 +42,7 @@ class WatchFace:
         22: {'Name': 'HourlyImages', 'Type': HourlyImages}, #eddc844402b6157dfb01e2b780b64b0b.bin
         23: {'Name': 'PaiProgress', 'Type': ProgressAlt1}, #9ab2ccafb3b7b67fd47cc350236ddffe.bin
         24: {'Name': 'StandUpProgress', 'Type': ProgressAlt5},
-        #25: {'Name': 'Unknown25', 'Type': 'long?'},
+        25: {'Name': 'AirQualityProgress', 'Type': ProgressAlt2},
         26: {'Name': 'UviProgress', 'Type': ProgressAlt2}, #9ab2ccafb3b7b67fd47cc350236ddffe.bin
         27: {'Name': 'StressProgress', 'Type': ProgressAlt4}, #4c8c5364650875f4aad4a90663e51f4a.bin
         28: {'Name': 'SPO2Progress', 'Type': ProgressAlt4}, #4c8c5364650875f4aad4a90663e51f4a.bin

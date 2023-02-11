@@ -16,6 +16,7 @@ class WatchFace(ContainerElement):
         self._standUpProgress = None
         self._humidityProgress = None
         self._uviProgress = None
+        self._airQualityProgress = None
         self._daysProgress = None
         self._status = None
         self._battery = None
@@ -144,8 +145,10 @@ class WatchFace(ContainerElement):
             from watchFaceParser.models.gts2mini.elements.activity.standupProgressElement import StandUpProgressElement
             self._standUpProgress = StandUpProgressElement(parameter)
             return self._standUpProgress
-        elif parameterId == 25:  #
-            pass
+        elif parameterId == 25:
+            from watchFaceParser.models.gts2mini.elements.weather.airQualityProgressElement import AirQualityProgressElement
+            self._airQualityProgress = AirQualityProgressElement(parameter)
+            return self._airQualityProgress
         elif parameterId == 26:
             from watchFaceParser.models.gts2mini.elements.weather.uviProgressElement import UviProgressElement
             self._uviProgress = UviProgressElement(parameter)
