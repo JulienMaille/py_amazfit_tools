@@ -110,3 +110,4 @@ test/
 testgts2/
 test-watches/
 .idea/
+output/main.exe
