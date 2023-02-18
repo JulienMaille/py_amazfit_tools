@@ -11,12 +11,12 @@ class YearMonthAndDay:
         5: {'Name': 'DayFollowsMonth', 'Type': 'bool'},
         6: {'Name': 'MonthAsWord', 'Type': ImageSet},
         7: {'Name': 'MonthAsWordChinese', 'Type': ImageSet},
-        8: {'Name': 'YearDataTypeImageIndex', 'Type': 'long'},
-        9: {'Name': 'MonthDataTypeImageIndex', 'Type': 'long'},
-        10: {'Name': 'DayDataTypeImageIndex', 'Type': 'long'},
-        11: {'Name': 'DelimiterYearImageIndex', 'Type': 'long'},
-        12: {'Name': 'DelimiterMonthImageIndex', 'Type': 'long'},
-        13: {'Name': 'DelimiterDayImageIndex', 'Type': 'long'},
+        8: {'Name': 'DelimiterYearImageIndex', 'Type': 'long'},
+        9: {'Name': 'DelimiterMonthImageIndex', 'Type': 'long'},
+        10: {'Name': 'DelimiterDayImageIndex', 'Type': 'long'},
+        11: {'Name': 'YearDataTypeImageIndex', 'Type': 'long'},
+        12: {'Name': 'MonthDataTypeImageIndex', 'Type': 'long'},
+        13: {'Name': 'DayDataTypeImageIndex', 'Type': 'long'},
         14: {'Name': 'YearDataTypeCoordinates', 'Type': Coordinates}, # Datatype coords
         15: {'Name': 'MonthDataTypeCoordinates', 'Type': Coordinates}, # Datatype coords
         16: {'Name': 'DayDataTypeCoordinates', 'Type': Coordinates}, # Datatype coords
