@@ -47,11 +47,10 @@ class TimeDigitalElement(ContainerElement):
                                            followxy = followxy if self._minutes_follow_hours else None,
                                            suffix = self._minutes_delimiter_image_index)
 
-            if self._minutes_data_type_image_index:
-                if self._minutes_data_type_coordinates:
-                    self.drawDelimiter(drawer, images, self._minutes_data_type_image_index,
-                                       self._minutes_data_type_coordinates.getX(),
-                                       self._minutes_data_type_coordinates.getY())
+            if self._minutes_data_type_coordinates:
+                self.drawDelimiter(drawer, images, self._minutes_data_type_image_index,
+                                    self._minutes_data_type_coordinates.getX(),
+                                    self._minutes_data_type_coordinates.getY())
 
 
     def drawDelimiter(self, drawer, images, index, x, y):
