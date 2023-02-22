@@ -8,9 +8,9 @@ class Date:
         1: { 'Name': 'MonthAndDayAlt', 'Type': MonthAndDayAlt}, # alternate date
         2: { 'Name': 'OneLineMonthAndDay', 'Type': OneLineMonthAndDay},
         3: { 'Name': 'OneLineYearMonthAndDay', 'Type': OneLineYearMonthAndDay},
+        9: { 'Name': 'YearMonthAndDay', 'Type': YearMonthAndDay},  
         4: { 'Name': 'PaddingZeroMonth', 'Type': 'bool'},
         5: { 'Name': 'PaddingZeroDay', 'Type': 'bool'},
-        6: { 'Name': 'UnknownBoolean6', 'Type': 'bool'}, #always false?
-        9: { 'Name': 'YearMonthAndDay', 'Type': YearMonthAndDay}, #rename YearMonthAndDay
+        6: { 'Name': 'UnknownBoolean6', 'Type': 'bool'}, #always false!
     }
 

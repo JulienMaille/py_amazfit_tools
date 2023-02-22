@@ -10,6 +10,7 @@ class DigitalDialElement(ContainerElement):
         self._padding_zero_hours = None
         self._delimiter_hours = None
         self._delimiter_minutes = None
+        self._delimiter_seconds = None
         self._time = None
         super(DigitalDialElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
@@ -33,7 +34,7 @@ class DigitalDialElement(ContainerElement):
                                        self._time.getHoursDataTypeCoordinates().getY())
 
         if self._time:
-            self._time.draw_time_element(drawer, images, state, followxy, delimiter_minutes=self._delimiter_minutes)
+            self._time.draw_time_element(drawer, images, state, followxy, delimiter_minutes=self._delimiter_minutes, delimiter_seconds=self._delimiter_seconds)
 
     def drawDelimiter(self, drawer, images, index, x, y):
         temp = images[index].getBitmap()
@@ -63,7 +64,8 @@ class DigitalDialElement(ContainerElement):
         elif parameterId == 6: # HoursFollowPosition - noting to draw
             pass
         elif parameterId == 7: # Unknown7
-            pass
+            self._delimiter_seconds = parameter.getValue()
+            return ValueElement(parameter, self, 'DelimiterSecondsImageIndex')
         elif parameterId == 8:
             from watchFaceParser.models.gts2mini.elements.time.timeElement import TimeElement
             self._time = TimeElement(parameter = parameter, parent = self, name = 'Time')

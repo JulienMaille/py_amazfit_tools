@@ -7,6 +7,7 @@ class TimeExtendedElement(ContainerElement):
     def __init__(self, parameter, parent = None, name = None):
         self._timeSeparateDigits = None
         self._timeAnalog = None
+        self._timeDigital = None
         self._amPm = None
         self._timeDigital = None
         super(TimeExtendedElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
@@ -29,7 +30,6 @@ class TimeExtendedElement(ContainerElement):
             from watchFaceParser.models.gts2mini.elements.aod.timeDigitalElement import TimeDigitalElement
             self._timeDigital = TimeDigitalElement(parameter = parameter, parent = self, name='TimeDigital')
             return self._timeDigital
-
         else:
             print ("Unknown TimeExtendedElement",parameterId)
             return super(TimeExtendedElement, self).createChildForParameter(parameter)
