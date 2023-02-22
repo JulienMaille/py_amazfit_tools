@@ -6,7 +6,7 @@ from watchFaceParser.models.gts2mini.elements.basic.containerElement import Cont
 class DigitalDialElement(ContainerElement):
     def __init__(self, parameter, parent = None, name = None):
         self._hours = None
-        self._hours_data_type = None
+        self._data_type_hours = None
         self._padding_zero_hours = None
         self._delimiter_hours = None
         self._delimiter_minutes = None
@@ -24,12 +24,12 @@ class DigitalDialElement(ContainerElement):
         if self._hours:
             followxy = self._hours.draw4(drawer, images, hours, 2, self._padding_zero_hours, suffix=self._delimiter_hours)
 
-            if self._hours_data_type:
+            if self._data_type_hours:
                 if self._time.getMinutesFollowHours():
-                    followxy = self.drawDelimiter(drawer, images, self._hours_data_type,
+                    followxy = self.drawDelimiter(drawer, images, self._data_type_hours,
                                                   followxy[0], followxy[1])
                 elif self._time.getHoursDataTypeCoordinates():
-                    self.drawDelimiter(drawer, images, self._hours_data_type,
+                    self.drawDelimiter(drawer, images, self._data_type_hours,
                                        self._time.getHoursDataTypeCoordinates().getX(),
                                        self._time.getHoursDataTypeCoordinates().getY())
 
@@ -50,7 +50,7 @@ class DigitalDialElement(ContainerElement):
             self._hours = NumberElement(parameter = parameter, parent = self, name = 'Hours')
             return self._hours
         elif parameterId == 2:
-            self._hours_data_type = parameter.getValue()
+            self._data_type_hours = parameter.getValue()
             return ValueElement(parameter, self, 'HoursDataTypeImageIndex')
         elif parameterId == 3:
             self._padding_zero_hours = parameter.getValue()

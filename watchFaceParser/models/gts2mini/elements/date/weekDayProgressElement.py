@@ -21,7 +21,7 @@ class WeekDayProgressElement(ContainerElement):
         if self._circle_scale:
             self._circle_scale.draw4(drawer, resources, state.getTime().weekday(), goal)
         if self._scale:
-            self._scale.draw4(drawer, resources, state.getTime().weekday(), goal)
+            self._scale.draw4(drawer, resources, state.getTime().weekday(), goal-1)
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()

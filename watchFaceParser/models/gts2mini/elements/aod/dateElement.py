@@ -24,6 +24,7 @@ class DateElement(CompositeElement):
                                          force_padding = self._padding_zero_month,
                                          followxy = None,
                                          suffix = self._delimiter_month)
+
             if self._datatype_month_coords:
                 self.drawDelimiter(drawer, images, self._datatype_month,
                                     self._datatype_month_coords.getX(),

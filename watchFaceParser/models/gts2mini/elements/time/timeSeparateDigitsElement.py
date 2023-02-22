@@ -9,7 +9,7 @@ class TimeSeparateDigitsElement(ContainerElement):
         self._minutes = None
         self._seconds = None
         self._amPm = None
-        # self._drawingOrder = None
+        self._drawingOrder = [1, 2, 3, 4]
         self._separator_hours = None
         self._delimiter2 = None
         self._pm = None
@@ -29,15 +29,16 @@ class TimeSeparateDigitsElement(ContainerElement):
 
         hours = state.getTime().hour
 
-        if self.getHours() and self.getHours().getTens():
-            self.getHours().getTens().draw3(drawer, images, int(hours % 100 / 10))
-        if self.getHours() and self.getHours().getOnes():
-            self.getHours().getOnes().draw3(drawer, images, hours % 10)
+        for i in range(0, 4):
+            if self.getHours() and self.getHours().getTens() and self._drawingOrder[i] == 1:
+                self.getHours().getTens().draw3(drawer, images, int(hours % 100 / 10))
+            if self.getHours() and self.getHours().getOnes() and self._drawingOrder[i] == 2:
+                self.getHours().getOnes().draw3(drawer, images, hours % 10)
 
-        if self.getMinutes() and self.getMinutes().getTens():
-            self.getMinutes().getTens().draw3(drawer, images, int(state.getTime().minute % 100 / 10))
-        if self.getMinutes() and self.getMinutes().getOnes():
-            self.getMinutes().getOnes().draw3(drawer, images, state.getTime().minute % 10)
+            if self.getMinutes() and self.getMinutes().getTens() and self._drawingOrder[i] == 3:
+                self.getMinutes().getTens().draw3(drawer, images, int(state.getTime().minute % 100 / 10))
+            if self.getMinutes() and self.getMinutes().getOnes() and self._drawingOrder[i] == 4:
+                self.getMinutes().getOnes().draw3(drawer, images, state.getTime().minute % 10)
 
         if self.getSeconds():
             self.getSeconds().draw3(drawer, images, state.getTime().second)
@@ -61,7 +62,7 @@ class TimeSeparateDigitsElement(ContainerElement):
             self._seconds = TwoDigitsElement(parameter = parameter, parent = self, name = 'Seconds')
             return self._seconds
         elif parameterId == 4:
-            pass
+            self._drawingOrder = [(parameter._value & 0xF000) >> 12, (parameter._value & 0xF00) >> 8, (parameter._value & 0xF0) >> 4, parameter._value & 0xF]
         elif parameterId == 5:
             from watchFaceParser.models.gts2mini.elements.common.imageElement import ImageElement
             self._separator_hours = ImageElement(parameter=parameter, parent=self, name='Separator')
