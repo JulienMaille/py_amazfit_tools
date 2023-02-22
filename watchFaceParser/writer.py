@@ -46,6 +46,7 @@ class Writer:
 
         logging.debug("Writing header...")
         from watchFaceParser.models.header import Header
+        maxEncodedParametersLength = max(maxEncodedParametersLength, len(encodedParametersPositions.getbuffer()))
         header = Header(unknown = maxEncodedParametersLength, parametersSize = len(encodedParametersPositions.getbuffer()))
         header.writeTo(self._stream)
 
