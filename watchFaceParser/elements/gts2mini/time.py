@@ -3,7 +3,7 @@ from watchFaceParser.elements.gts2mini.basicElements.coordinates import Coordina
 
 class Time:
     definitions = {
-        1: { 'Name': 'Unknown1', 'Type': 'long'}, #bool? always 1
+        1: { 'Name': 'Unknown1', 'Type': 'long'}, #always 1 !!!
         2: { 'Name': 'Minutes', 'Type': Number},
         3: { 'Name': 'Seconds', 'Type': Number},
         4: { 'Name': 'PaddingZeroMinutes', 'Type': 'bool'},

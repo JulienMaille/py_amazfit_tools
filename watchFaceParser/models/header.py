@@ -47,8 +47,10 @@ class Header:
         buffer[11] = val_11 # verge
         t = self.unknown.to_bytes(4, byteorder='little')
         buffer[Header.unknownPos:Header.unknownPos+len(t)] = t
+        logging.debug(f"unknown: {self.unknown}")
         t = self.parametersSize.to_bytes(4, byteorder='little')
         buffer[Header.parametersSizePos:Header.parametersSizePos+len(t)] = t
+        logging.debug(f"parametersSize: {self.parametersSize}")
 
         self.hackBuffer(1, buffer)
         stream.write(buffer)

@@ -33,6 +33,7 @@ class ProgressAlt1:
 class ProgressAlt2:
     definitions = {
         1: {'Name': 'ImageProgress', 'Type': ImageSet},
+        3: {'Name': 'Scale', 'Type': Scale},
         5: {'Name': 'NoDataImage', 'Type': Image},
     }
 

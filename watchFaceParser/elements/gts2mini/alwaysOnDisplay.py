@@ -62,8 +62,8 @@ class AoDDate:
         6: {'Name': 'DelimiterDayImageIndex', 'Type': 'long'},
         7: {'Name': 'PaddingZeroMonth', 'Type': 'bool'},
         8: {'Name': 'PaddingZeroDay', 'Type': 'bool'},
-        9: {'Name': 'DelimiterMonthCoordinates', 'Type': Coordinates},
-        10: {'Name': 'DelimiterDayCoordinates', 'Type': Coordinates},
+        9: {'Name': 'MonthDataTypeCoordinates', 'Type': Coordinates},
+        10: {'Name': 'DayDataTypeCoordinates', 'Type': Coordinates},
         11: {'Name': 'DayFollowsMonth', 'Type': 'bool'}, # mostly false except in a611dc2d3574c2645bcbbb64028103ad.bin
     }
 
