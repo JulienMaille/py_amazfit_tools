@@ -141,7 +141,6 @@ class ResourcesLoader:
 
     def loadImage(self, index):
         return self.loadImage_orig(index)
-    ;
         # assert(type(index) == int)
         # if index in self._mapping:
         #     return self._mapping[index]
