@@ -1,1 +1,1 @@
-pyinstaller --noconfirm --onefile --console --icon "assets\icons8-smartwatch-32.ico" --distpath "output"  "main.py"
+pyinstaller --noconfirm --onefile --console --icon "assets\icons8-smartwatch-32.ico" --distpath "output\gts2mini"  "main.py"
