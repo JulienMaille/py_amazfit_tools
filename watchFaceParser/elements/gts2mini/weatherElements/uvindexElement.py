@@ -7,6 +7,7 @@ class UVindex:
         1: {'Name': 'UVindexNumber', 'Type': Number},
         2: {'Name': 'SuffixImageIndex', 'Type': 'long'},
         3: {'Name': 'Shortcut', 'Type': Element},
+        5: {'Name': 'PrefixImageIndex', 'Type': 'long'},
         6: {'Name': 'NoDataImageIndex', 'Type': 'long'},
         9: {'Name': 'UVindexIcon', 'Type': Image},
     }
