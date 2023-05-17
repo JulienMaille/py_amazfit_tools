@@ -8,19 +8,32 @@ class StepsElement(CompositeElement):
         self._prefix = None
         self._suffix = None
         self._icon = None
+        self._delimiter = None
         super(StepsElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
     def draw3(self, drawer, resources, state):
         if self._icon:
             self._icon.draw3(drawer, resources, state)
         if self._image_number:
-            self._image_number.draw4(drawer,
-                                     resources,
-                                     state.getSteps(),
-                                     minimum_digits= 5,
-                                     force_padding = False,
-                                     prefix = self._prefix,
-                                     suffix = self._suffix)
+            if self._delimiter:
+                self._image_number.draw5(drawer,
+                                        resources,
+                                        [ state.getSteps(), state.getGoal()],
+                                        minimum_digits_array= [5, 5],
+                                        force_padding_array = [False, False],
+                                        prefix = self._prefix,
+                                        suffix = self._suffix,
+                                        delimiter = self._delimiter)
+            else:
+                self._image_number.draw4(drawer,
+                                        resources,
+                                        state.getSteps(),
+                                        minimum_digits= 5,
+                                        force_padding = False,
+                                        prefix = self._prefix,
+                                        suffix = self._suffix)
+                
+            
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
@@ -41,7 +54,11 @@ class StepsElement(CompositeElement):
             from watchFaceParser.models.gts2mini.elements.common.imageElement import ImageElement
             self._icon = ImageElement(parameter=parameter, parent=self, name='Icon')
             return self._icon
-        elif parameterId == 4:  # Shortcut
+        elif parameterId == 6:  # Shortcut
             pass
+        elif parameterId == 7:
+            from watchFaceParser.models.gts2mini.elements.basic.valueElement import ValueElement
+            self._delimiter = parameter.getValue()
+            return ValueElement(parameter, self, 'DelimiterTotalImageIndex')
         else:
             super(StepsElement, self).createChildForParameter(parameter)

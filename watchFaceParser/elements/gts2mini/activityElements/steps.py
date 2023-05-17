@@ -9,5 +9,5 @@ class Steps:
         3: {'Name': 'SuffixImageIndex', 'Type': 'long'},
         4: {'Name': 'Icon', 'Type': Image},
         6: {'Name': 'Shortcut', 'Type': Element},
-        7: {'Name': 'SuffixImageIndex', 'Type': 'long'},
+        7: {'Name': 'DelimiterTotalImageIndex', 'Type': 'long'}, # zepp - c11e6b385afd124e9e8af15131c1092e TODO preview add
     }
