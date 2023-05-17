@@ -9,6 +9,7 @@ class DistanceElement(CompositeElement):
         self._suffix_mi = None
         self._decimalpointer = None
         self._icon = None
+        self._suffixcoord = None
         super(DistanceElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
     def draw3(self, drawer, resources, state):
@@ -22,7 +23,11 @@ class DistanceElement(CompositeElement):
                                      minimum_digits= 3,
                                      force_padding = False,
                                      decimal_pointer = self._decimalpointer,
-                                     suffix = self._suffix_km if self._suffix_km else self._suffix_mi)
+                                     suffix = ( self._suffix_km if self._suffix_km else self._suffix_mi) if self._suffixcoord else None)
+            if self._suffixcoord:
+                temp = resources[self._suffix_km if self._suffix_km else self._suffix_mi].getBitmap()
+                drawer.paste(temp, (self._suffixcoord._x, self._suffixcoord._y), temp)
+
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
@@ -49,6 +54,10 @@ class DistanceElement(CompositeElement):
             return self._icon
         elif parameterId == 6:  # Shortcut
             pass
+        elif parameterId == 8:
+            from watchFaceParser.models.gts2mini.elements.common.coordinatesElement import CoordinatesElement
+            self._suffixcoord = CoordinatesElement(parameter=parameter, parent=self, name='SuffixImageCoordinates')
+            return self._suffixcoord
         else:
             super(DistanceElement, self).createChildForParameter(parameter)
 
