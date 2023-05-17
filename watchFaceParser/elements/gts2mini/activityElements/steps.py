@@ -6,7 +6,7 @@ class Steps:
     definitions = {
         1: {'Name': 'ImageNumber', 'Type': Number},
         2: {'Name': 'PrefixImageIndex', 'Type': 'long'},
-        3: {'Name': 'NoDataImageIndex', 'Type': 'long'},
+        3: {'Name': 'SuffixImageIndex', 'Type': 'long'},
         4: {'Name': 'Icon', 'Type': Image},
         6: {'Name': 'Shortcut', 'Type': Element},
         7: {'Name': 'SuffixImageIndex', 'Type': 'long'},

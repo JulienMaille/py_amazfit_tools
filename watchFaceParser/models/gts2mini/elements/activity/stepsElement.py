@@ -6,7 +6,7 @@ class StepsElement(CompositeElement):
     def __init__(self, parameter, parent, name = None):
         self._image_number = None
         self._prefix = None
-        self._nodata = None
+        self._suffix = None
         self._icon = None
         super(StepsElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
@@ -19,7 +19,8 @@ class StepsElement(CompositeElement):
                                      state.getSteps(),
                                      minimum_digits= 5,
                                      force_padding = False,
-                                     prefix = self._prefix)
+                                     prefix = self._prefix,
+                                     suffix = self._suffix)
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
@@ -34,8 +35,8 @@ class StepsElement(CompositeElement):
             return ValueElement(parameter, self, 'PrefixImageIndex')
         elif parameterId == 3:
             from watchFaceParser.models.gts2mini.elements.basic.valueElement import ValueElement
-            self._nodata = parameter.getValue()
-            return ValueElement(parameter, self, 'NoDataImageIndex')
+            self._suffix = parameter.getValue()
+            return ValueElement(parameter, self, 'SuffixImageIndex')
         elif parameterId == 4:
             from watchFaceParser.models.gts2mini.elements.common.imageElement import ImageElement
             self._icon = ImageElement(parameter=parameter, parent=self, name='Icon')

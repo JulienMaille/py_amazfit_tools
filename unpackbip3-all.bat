@@ -10,7 +10,7 @@ for /d %%i in (%1\*) do (
     echo "%%i"
     for %%x in (%%i\*.bin) do (
         echo "%%x"
-        call python %mPathScript%\main.py --gts2mini --file "%%x"
+        call python %mPathScript%\main.py --bip3 --file "%%x"
     )
 )
 
