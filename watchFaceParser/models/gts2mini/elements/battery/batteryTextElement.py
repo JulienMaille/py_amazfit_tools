@@ -6,6 +6,7 @@ class BatteryTextElement(ContainerElement):
         self._image_number = None
         self._prefix = None
         self._nodata = None
+        self._unknown2 = None
         self._suffix = None
         self._icon = None
         super(BatteryTextElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
@@ -13,13 +14,13 @@ class BatteryTextElement(ContainerElement):
     def draw3(self, drawer, resources, state):
 
         if self._image_number:
-            followxy = self._image_number.draw4(drawer,
-                                                resources,
-                                                state.getBatteryLevel(),
-                                                minimum_digits= 3,
-                                                force_padding = False,
-                                                prefix = self._prefix,
-                                                suffix = self._suffix)
+            self._image_number.draw4(drawer, 
+                                     resources,
+                                     state.getBatteryLevel(),
+                                     minimum_digits= 3,
+                                     force_padding = False,
+                                     prefix = self._prefix,
+                                     suffix = self._suffix)
         if self._icon:
             self._icon.draw3(drawer, resources, state)
 
@@ -32,12 +33,12 @@ class BatteryTextElement(ContainerElement):
             return self._image_number
         elif parameterId == 2:
             from watchFaceParser.models.gts2mini.elements.basic.valueElement import ValueElement
-            self._prefix = parameter.getValue()
-            return ValueElement(parameter, self, 'PrefixImageIndex')
+            self._unknown2 = parameter.getValue()
+            return ValueElement(parameter, self, 'UnknownLong2')
         elif parameterId == 3:
             from watchFaceParser.models.gts2mini.elements.basic.valueElement import ValueElement
-            self._nodata = parameter.getValue()
-            return ValueElement(parameter, self, 'NoDataImageIndex')
+            self._prefix = parameter.getValue()
+            return ValueElement(parameter, self, 'PrefixImageIndex')
         elif parameterId == 4:
             from watchFaceParser.models.gts2mini.elements.basic.valueElement import ValueElement
             self._suffix = parameter.getValue()
