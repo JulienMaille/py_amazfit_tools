@@ -23,7 +23,7 @@ class DistanceElement(CompositeElement):
                                      minimum_digits= 3,
                                      force_padding = False,
                                      decimal_pointer = self._decimalpointer,
-                                     suffix = ( self._suffix_km if self._suffix_km else self._suffix_mi) if self._suffixcoord else None)
+                                     suffix = ( self._suffix_km if self._suffix_km else self._suffix_mi) if not self._suffixcoord else None)
             if self._suffixcoord:
                 temp = resources[self._suffix_km if self._suffix_km else self._suffix_mi].getBitmap()
                 drawer.paste(temp, (self._suffixcoord._x, self._suffixcoord._y), temp)
