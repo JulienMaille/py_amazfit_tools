@@ -46,7 +46,7 @@ class ResourcesLoader:
         assert(type(path) == str)
         if path != None and path != '':
             logging.debug(f"Loading resources for {path} '{T}'")
-        print (f"Loading resources for {path} '{T}'")
+        #print (f"Loading resources for {path} '{T}'")
 
         lastImageIndexValue = None
         properties = ElementsHelper.sortedProperties(T)
@@ -64,7 +64,7 @@ class ResourcesLoader:
             imageIndexAttribute = ElementsHelper.getCustomAttributeFor('ImageIndex', propertyInfo) 
             imagesCountAttribute = ElementsHelper.getCustomAttributeFor('ImagesCount', propertyInfo)
             logging.debug(f"INDEX {imageIndexAttribute,propertyInfo['Name']} '{propertyValue}'")
-            print("INDEX",imageIndexAttribute,propertyInfo['Name'],propertyValue)
+            #print("INDEX",imageIndexAttribute,propertyInfo['Name'],propertyValue)
 
             if imagesCountAttribute != None and imageIndexAttribute != None:
                 raise IndexError(
