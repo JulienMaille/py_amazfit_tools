@@ -35,12 +35,16 @@ class WatchFace(ContainerElement):
     def draw3(self, drawer, images, state):
         if state.getScreenIdle() is None:
             super(WatchFace, self).draw3(drawer, images, state)
+            if self._animation:
+                self._animation.draw3(drawer, images, state) # draw animaiton on top
         else:
             if self._aod:
                 self.drawBlackBackground(drawer)
                 self._aod.draw3(drawer, images, state)
             else: # no AOD - normal Screen
                 super(WatchFace, self).draw3(drawer, images, state)
+                if self._animation:
+                    self._animation.draw3(drawer, images, state) # draw animaiton on top
             return
 
     def drawBlackBackground(self, drawer):
