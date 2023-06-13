@@ -1,7 +1,7 @@
 ﻿import logging
 
 from watchFaceParser.models.gts2mini.elements.basic.containerElement import ContainerElement
-
+from watchFaceParser.config import Config
 
 class WatchFace(ContainerElement):
     def __init__(self, parameters):
@@ -38,7 +38,7 @@ class WatchFace(ContainerElement):
             if self._animation:
                 self._animation.draw3(drawer, images, state) # draw animaiton on top
         else:
-            if self._aod:
+            if self._aod and not Config.isBip3Mode():
                 self.drawBlackBackground(drawer)
                 self._aod.draw3(drawer, images, state)
             else: # no AOD - normal Screen
