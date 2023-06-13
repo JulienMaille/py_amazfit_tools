@@ -12,7 +12,7 @@ class Writer:
 
     def write(self, image):
 
-        if Config.isGts2MiniMode() or Config.isBipUMode():
+        if Config.isGts2MiniMode() or Config.isBipUMode() or Config.isBip3Mode():
             self.writeGts2Mini(image)
         else:
             self.writeGts2(image)

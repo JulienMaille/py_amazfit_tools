@@ -204,7 +204,7 @@ class Parameter:
             logging.info("Warning found Unknown2 flag")
         elif flags.hasFlag(ParameterFlags.hasChildren):
             value = Parameter.readValue(fileStream, traceOffset)
-            if not Config.isGtr2Mode() and not Config.isGts2Mode() and not Config.isTrexProMode() and not Config.isGts2MiniMode() or Config.isBipUMode():
+            if not Config.isGtr2Mode() and not Config.isGts2Mode() and not Config.isTrexProMode() and not Config.isGts2MiniMode() or Config.isBipUMode() or Config.isBip3Mode():
                 if value == 0:
                     logging.info("DEBUG                 %02x" % Parameter.readByte(fileStream, traceOffset))
                     logging.info("DEBUG                 %02x" % Parameter.readByte(fileStream, traceOffset))

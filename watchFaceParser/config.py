@@ -142,6 +142,10 @@ class Config:
     @staticmethod
     def isBipUMode():
         return Config._is_bip_u
+    
+    @staticmethod
+    def isBip3Mode():
+        return Config._is_bip_3
 
     @staticmethod
     def isTrexMode():
@@ -246,7 +250,7 @@ class Config:
     def setBip3Mode(bip3):
         if bip3:
             Config._autodetect = False
-            Config._is_bip_u = 40
+            Config._is_bip_3 = 40
             Config._image_size = Config._size_bip_3
             Config._preview_size = (148, 173)
             Config._startImageIndex = 0

@@ -61,7 +61,7 @@ class Parser:
         try:
             if not Config.isOldFormat() and (Config.isGtr2Mode() or Config.isGts2Mode() or Config.isTrexProMode()): 
                 from watchFaceParser.watchFaceGTR2 import WatchFace
-            elif Config.isGts2MiniMode() or Config.isBipUMode():
+            elif Config.isGts2MiniMode() or Config.isBipUMode() or Config.isBip3Mode():
                 from watchFaceParser.watchFaceGTS2Mini import WatchFace
             else:
                 from watchFaceParser.watchFace import WatchFace
@@ -81,7 +81,7 @@ class Parser:
             logging.debug(f"Writing watch face to '{outputFileName}'")
             with open(outputFileName, 'wb') as fileStream:
                 writer = Writer(fileStream, imagesReader.resources())
-                writer.write(descriptor, ( Config.isGts2MiniMode() or Config.isBipUMode() ) )
+                writer.write(descriptor, ( Config.isGts2MiniMode() or Config.isBipUMode() or Config.isBip3Mode() ) )
                 fileStream.flush() 
             from watchFaceParser.models.header import Header
             Header.patchHeaderAfter( outputFileName )
@@ -278,7 +278,7 @@ class Parser:
         logging.debug("Parsing parameters...")
         if not Config.isOldFormat() and (Config.isGtr2Mode() or Config.isGts2Mode() or Config.isTrexProMode()): 
             from watchFaceParser.watchFaceGTR2 import WatchFace
-        elif Config.isGts2MiniMode() or Config.isBipUMode():
+        elif Config.isGts2MiniMode() or Config.isBipUMode() or Config.isBip3Mode():
             from watchFaceParser.watchFaceGTS2Mini import WatchFace
         else:
             from watchFaceParser.watchFace import WatchFace

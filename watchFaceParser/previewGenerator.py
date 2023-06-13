@@ -5,7 +5,7 @@ class PreviewGenerator:
     def createAnimation(descriptor, images, states):
         if not Config.isOldFormat() and (Config.isGtr2Mode() or Config.isGts2Mode() or Config.isTrexProMode()):
             from watchFaceParser.models.gtr2.elements.watchFace import WatchFace
-        elif Config.isGts2MiniMode() or Config.isBipUMode():
+        elif Config.isGts2MiniMode() or Config.isBipUMode() or Config.isBip3Mode():
             from watchFaceParser.models.gts2mini.elements.watchFace import WatchFace
         else:
             from watchFaceParser.models.elements.watchFace import WatchFace
@@ -20,7 +20,7 @@ class PreviewGenerator:
     def createImage(descriptor, images, state):
         if not Config.isOldFormat() and (Config.isGtr2Mode() or Config.isGts2Mode() or Config.isTrexProMode()):
             from watchFaceParser.models.gtr2.elements.watchFace import WatchFace
-        elif Config.isGts2MiniMode() or Config.isBipUMode():
+        elif Config.isGts2MiniMode() or Config.isBipUMode() or Config.isBip3Mode():
             from watchFaceParser.models.gts2mini.elements.watchFace import WatchFace
         else:
             from watchFaceParser.models.elements.watchFace import WatchFace
@@ -39,7 +39,7 @@ class PreviewGenerator:
 
         if Config.isGtrMode() or Config.isGtr2Mode() or Config.isTrexMode() or Config.isTrexProMode():
             graphics = PreviewGenerator.cutCircled(graphics)
-        elif Config.isGtsMode() or Config.isGts2Mode() or Config.isBipUMode():
+        elif Config.isGtsMode() or Config.isGts2Mode() or Config.isBipUMode() or Config.isBip3Mode():
             graphics = PreviewGenerator.cutRoundedRectangle(graphics, 38)
         elif Config.isGts2MiniMode():
             graphics = PreviewGenerator.cutRoundedRectangle(graphics, 72)

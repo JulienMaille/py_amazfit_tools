@@ -30,7 +30,7 @@ class Header:
             Header.parametersSizePos = 80 
             self.signature = b"UIHH\x02\x00\xff"
             val_11 = 0x01
-        elif Config.isGts2MiniMode() or Config.isBipUMode():
+        elif Config.isGts2MiniMode() or Config.isBipUMode() or Config.isBip3Mode():
             Header.headerSize = 87
             Header.unknownPos = 79
             Header.parametersSizePos = 83
@@ -91,6 +91,8 @@ class Header:
             index = 73
         elif Config.isBipUMode():
             index = 71
+        elif Config.isBip3Mode():
+            index = 71
         elif Config.isGtsMode():
             index = Config.isGtsMode()
         elif Config.isTrexMode():
@@ -99,7 +101,7 @@ class Header:
             index = Config.isAmazfitXMode()
         p_0x10 = data_0x10[index]
         for i in range(len(p_0x10)):
-            if not Config.isGts2MiniMode() and not Config.isBipUMode():
+            if not Config.isGts2MiniMode() and not Config.isBipUMode() or Config.isBip3Mode():
                 buffer[0x10 + i] = p_0x10[i]
             else:
                 buffer[0x0B + i] = p_0x10[i]
@@ -111,7 +113,7 @@ class Header:
                 buffer[75] = 0x00
             else:
                 buffer[75] = 0x01
-        elif Config.isGts2MiniMode()  or Config.isBipUMode():
+        elif Config.isGts2MiniMode()  or Config.isBipUMode() or Config.isBip3Mode():
             buffer[32] = 0x00
         else:
             buffer[60:60+4] = int(64).to_bytes(4, byteorder='little')
@@ -130,7 +132,7 @@ class Header:
             Header.headerSize = 88 - 16
             Header.unknownPos = 76 - 16
             Header.parametersSizePos = 80 - 16
-        elif Config.isGts2MiniMode() or Config.isBipUMode():
+        elif Config.isGts2MiniMode() or Config.isBipUMode() or Config.isBip3Mode():
             Header.headerSize = 87 - 16
             Header.unknownPos = 79 - 16
             Header.parametersSizePos = 83 - 16
@@ -142,7 +144,7 @@ class Header:
         if Config.isGtr2Mode() or Config.isGts2Mode() or Config.isTrexProMode():
            Header.dialSignature = b"UIHH\x02\x00\xff"
 
-        if Config.isGts2MiniMode() or Config.isBipUMode():
+        if Config.isGts2MiniMode() or Config.isBipUMode() or Config.isBip3Mode():
            Header.dialSignature = b"UIHH\x01\x00\xff"
 
         buffer = stream.read(Header.headerSize)
@@ -159,14 +161,14 @@ class Header:
     
     @staticmethod
     def patchHeaderAfter( outputFileName ):
-        if Config.isGtr2Mode() or Config.isGts2Mode() or Config.isTrexProMode() or Config.isGts2MiniMode() or Config.isBipUMode():
+        if Config.isGtr2Mode() or Config.isGts2Mode() or Config.isTrexProMode() or Config.isGts2MiniMode() or Config.isBipUMode() or Config.isBip3Mode():
             with open(outputFileName, 'rb+') as fileStream:
                 logging.debug(f"Injecting additional header info") 
                 header = bytearray( fileStream.read(40) )       
                 data = bytearray( fileStream.read() )                 
                 #write size
                 size = len(data)
-                if Config.isGts2MiniMode() or Config.isBipUMode(): # BipU is some as Gts2Mini
+                if Config.isGts2MiniMode() or Config.isBipUMode() or Config.isBip3Mode(): # BipU is some as Gts2Mini
                     size += len(header)
                     header[22:22+4] = int(size).to_bytes(4, byteorder='little')
                     logging.debug(f"Injected size: {size}")
@@ -183,7 +185,7 @@ class Header:
                 logging.debug("basename 7 byte hash " + "".join("%02x" % b for b in basenamehash))
                 header[12:12+2] = basenamehash[0:2]#.to_bytes(2, byteorder='little')
                 header[18:18+2] = basenamehash[2:4]#.to_bytes(2, byteorder='little')
-                if not Config.isGts2MiniMode() and not Config.isBipUMode():
+                if not Config.isGts2MiniMode() and not Config.isBipUMode() or Config.isBip3Mode():
                     header[22:22+3] = basenamehash[4:7]#.to_bytes(3, byteorder='little')
                 
                 fileStream.seek(0)
