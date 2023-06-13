@@ -9,6 +9,18 @@ class AlarmElement(ContainerElement):
         self._alarm_time = None
         super(AlarmElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
+
+    def draw3(self, drawer, images, state):
+        if state.getAlarm():
+            if self._alarm_time:
+                self._alarm_time.draw3(drawer, images, state)
+            if self._alarm:
+                self._alarm.draw3(drawer, images, state)
+        else:
+            if self._no_alarm:
+                self._no_alarm.draw3(drawer, images, state)
+            
+
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
         if parameterId == 1:
