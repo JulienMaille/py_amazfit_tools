@@ -23,24 +23,24 @@ class TimeExtendedElement(ContainerElement):
             self._sunset_icon.draw3(drawer, images, state)
         if self._sunset_time:
             number = random.randint(17, 21) * 100 + random.randint(00, 59)
-            self._sunset_time.draw4(drawer, images, number, minimum_digits= 1,
-                                    force_padding = False,
+            self._sunset_time.draw4(drawer, images, number, minimum_digits= 4,
+                                    force_padding = True,
                                     followxy = None,
                                     delimiter_time = self._delimiter_sunset if self._delimiter_sunset else None,
                                     minus = None,
-                                    prefix = None,
+                                    prefix = self._sunset_prefix,
                                     suffix = None)
 
         if self._sunrise_icon:
             self._sunrise_icon.draw3(drawer, images, state)
         if self._sunrise_time:
             number = random.randint(4, 10) * 100 + random.randint(00, 59)
-            self._sunrise_time.draw4(drawer, images, number, minimum_digits= 1,
-                                     force_padding = False,
+            self._sunrise_time.draw4(drawer, images, number, minimum_digits= 4,
+                                     force_padding = True,
                                      followxy = None,
                                      delimiter_time = self._delimiter_sunrise if self._delimiter_sunrise else None,
                                      minus = None,
-                                     prefix = None,
+                                     prefix = self._sunrise_prefix,
                                      suffix = None)
 
     def createChildForParameter(self, parameter):
@@ -76,6 +76,12 @@ class TimeExtendedElement(ContainerElement):
             pass
         elif parameterId == 9:
             pass
+        elif parameterId == 11:
+            self._sunrise_prefix = parameter.getValue()
+            return ValueElement(parameter=parameter, parent=self, name='SunriseImageIndex')
+        elif parameterId == 12:
+            self._sunset_prefix = parameter.getValue()
+            return ValueElement(parameter=parameter, parent=self, name='SunsetImageIndex')
         else:
             print ("Unknown TimeExtended",parameterId)
             return super(TimeExtendedElement, self).createChildForParameter(parameter)

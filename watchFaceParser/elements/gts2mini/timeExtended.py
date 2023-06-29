@@ -26,7 +26,7 @@ class TimeExtended:
         7: {'Name': 'SunriseIcon', 'Type': Image},
         8: {'Name': 'SunsetShortcut', 'Type': Element},
         9: {'Name': 'SunriseShortcut', 'Type': Element},
-        11: {'Name': 'SunsetImageIndex', 'Type': 'long'},
-        12: {'Name': 'SunriseImageIndex', 'Type': 'long'},
+        11: {'Name': 'SunriseImageIndex', 'Type': 'long'},
+        12: {'Name': 'SunsetImageIndex', 'Type': 'long'},
     }
 
