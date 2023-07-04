@@ -6,9 +6,12 @@ set file=%~n1
 set mPath=%~dp1
 set mPathScript=%~dp0
 
-for %%i in (%1\*.bin) do (
+for /d %%i in (%1\*) do (
     echo "%%i"
-    call python %mPathScript%\main.py --bipu --file "%%i"
+    for %%x in (%%i\*.bin) do (
+        echo "%%x"
+        call python %mPathScript%\main.py --bipu --file "%%x"
+    )
 )
 
 pause
