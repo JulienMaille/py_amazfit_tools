@@ -8,26 +8,33 @@ class AnalogDialElement(ContainerElement):
         self._hours = None
         self._minutes = None
         self._seconds = None
+        self._common_center = None
         super(AnalogDialElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
 
-    def getHours(self):
-        return self._hours
-
-
-    def getMinutes(self):
-        return self._minutes
-
-
-    def getSeconds(self):
-        return self._seconds
+    def draw3(self, drawer, images, state):
+        if self._hours:
+            if self._common_center and not self._hours._center:
+                self._hours._center = self._common_center
+            self._hours.draw3(drawer, images, state)
+        if self._minutes:
+            if self._common_center and not self._minutes._center:
+                self._minutes._center = self._common_center
+            self._minutes.draw3(drawer, images, state)
+        if self._seconds:
+            if self._common_center and not self._seconds._center:
+                self._seconds._center = self._common_center
+            self._seconds.draw3(drawer, images, state)
+    
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
         if parameterId == 1:
             pass
-        elif parameterId == 2:
-            pass
+        elif parameterId == 2: # CommonCenterCoordinates
+            from watchFaceParser.models.gts2mini.elements.common.coordinatesElement import CoordinatesElement
+            self._common_center = CoordinatesElement(parameter = parameter, parent = self, name = 'CommonCenterCoordinates')
+            return self._common_center
         elif parameterId == 3:
             from watchFaceParser.models.gts2mini.elements.analogDial.hoursClockHandElement import HoursClockHandElement
             self._hours = HoursClockHandElement(parameter = parameter, parent = self, name = 'Hours')
