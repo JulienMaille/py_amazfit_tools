@@ -32,6 +32,7 @@ class WatchFace(ContainerElement):
         self._spoProgress = None
         self._alarm = None
         self._aod = None
+        self._weekdayimages = None
         super(WatchFace, self).__init__(parameters, parameter = None, parent = None, name = '')
 
     def draw3(self, drawer, images, state):
@@ -109,8 +110,10 @@ class WatchFace(ContainerElement):
             return self._heartProgress
         elif parameterId == 13: #
             pass
-        elif parameterId == 14: #
-            pass
+        elif parameterId == 14: 
+            from watchFaceParser.models.gts2mini.elements.date.weekdayImagesElement import WeekdayImagessElement
+            self._weekdayimages = WeekdayImagessElement(parameter)
+            return self._weekdayimages
         elif parameterId == 15: # calories progress
             from watchFaceParser.models.gts2mini.elements.activity.caloriesProgressElement import CaloriesProgressElement
             self._caloriesProgress = CaloriesProgressElement(parameter)

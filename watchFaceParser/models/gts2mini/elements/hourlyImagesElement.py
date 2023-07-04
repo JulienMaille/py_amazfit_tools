@@ -38,7 +38,7 @@ class HourlyImageElement(ContainerElement):
             hours = state.getTime().hour
             mins = state.getTime().minute
             idx = 0
-            while not(self._timespans[idx]._start_hour*60 + self._timespans[idx]._start_hour
+            while idx < (len(self._timespans)-1) and not(self._timespans[idx]._start_hour*60 + self._timespans[idx]._start_hour
                       <= hours*60 + mins
                       <= self._timespans[idx]._stop_hour*60 + self._timespans[idx]._stop_min):
                 idx += 1
