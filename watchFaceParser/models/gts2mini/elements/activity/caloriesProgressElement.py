@@ -30,7 +30,6 @@ class CaloriesProgressElement(ContainerElement):
             self._image_progress = ImageSetElement(parameter=parameter, parent=self, name='ImageProgress')
             return self._image_progress
         elif parameterId == 3:
-            pass
             from watchFaceParser.models.gts2mini.elements.common.iconSetElement import IconSetElement
             self._iconset_progress = IconSetElement(parameter = parameter, parent = self, name ='IconSetProgress')
             return self._iconset_progress
