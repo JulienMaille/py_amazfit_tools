@@ -1,4 +1,4 @@
-class TextAlignment:
+class TextAlignmentGts2Mini:
     Default = 0
     Left = 2
     Right = 4
@@ -20,6 +20,8 @@ class TextAlignment:
     BottomLeft = Bottom | Left
     BottomRight = Bottom | Right
 
+    Unknown130 = 130 # bipu - d45d3d25a9e51c543a9d47dc39c5b068
+
     Converter = {
         Default : "Default",
         Left : "Left",
@@ -38,6 +40,8 @@ class TextAlignment:
         BottomCenter : "BottomCenter",
         BottomLeft : "BottomLeft",
         BottomRight : "BottomRight",
+
+        Unknown130: "Unknown130"
     }
 
     def __init__(self, flag):
@@ -49,11 +53,11 @@ class TextAlignment:
     def toJSON(self):
         if self._flag == None:
             self._flag = 0
-        return TextAlignment.Converter[self._flag]
+        return TextAlignmentGts2Mini.Converter[self._flag]
 
     @staticmethod
     def fromJSON(strFlag):
-        for flag in TextAlignment.Converter:
-            if strFlag == TextAlignment.Converter[flag]:
+        for flag in TextAlignmentGts2Mini.Converter:
+            if strFlag == TextAlignmentGts2Mini.Converter[flag]:
                 return flag
         return 0

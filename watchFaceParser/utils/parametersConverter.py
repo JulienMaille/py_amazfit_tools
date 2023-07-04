@@ -4,6 +4,7 @@ import os.path
 from watchFaceParser.utils.elementsHelper import ElementsHelper
 from watchFaceParser.models.parameterFlags import ParameterFlags
 from watchFaceParser.models.textAlignment import TextAlignment
+from watchFaceParser.models.gts2mini.textAlignmentGts2Mini import TextAlignmentGts2Mini
 from watchFaceParser.models.color import Color
 from watchFaceParser.models.parameter import Parameter
 from watchFaceParser.config import Config 
@@ -68,6 +69,7 @@ class ParametersConverter:
                     propertyType == 'float' or 
                     propertyType == TextAlignment or 
                     propertyType == TextAlignmentGTR2 or 
+                    propertyType == TextAlignmentGts2Mini or 
                     propertyType == ActivityType or 
                     propertyType == ShortcutType or 
                     propertyType == Color or 
@@ -87,6 +89,8 @@ class ParametersConverter:
                     value = TextAlignment.fromJSON(propertyValue)
                 elif propertyType == TextAlignmentGTR2:
                     value = TextAlignmentGTR2.fromJSON(propertyValue)
+                elif propertyType == TextAlignmentGts2Mini:
+                    value = TextAlignmentGts2Mini.fromJSON(propertyValue)
                 elif propertyType == DigitType:
                     value = DigitType.fromJSON(propertyValue)
                 elif propertyType == LangCodeType:
@@ -237,6 +241,8 @@ class ParametersConverter:
                 setattr(result, propertyInfoName, TextAlignment(parameter.getValue()))
             elif propertyType == TextAlignmentGTR2:
                 setattr(result, propertyInfoName, TextAlignmentGTR2(parameter.getValue()))
+            elif propertyType == TextAlignmentGts2Mini:
+                setattr(result, propertyInfoName, TextAlignmentGts2Mini(parameter.getValue()))
             elif propertyType == ParameterFlags:
                 setattr(result, propertyInfoName, ParameterFlags(parameter.getValue()))
             elif propertyType == TimeType:
