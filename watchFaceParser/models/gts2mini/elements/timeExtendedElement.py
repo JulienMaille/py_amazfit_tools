@@ -12,6 +12,8 @@ class TimeExtendedElement(ContainerElement):
         self._delimiter_sunrise = None
         self._sunset_icon = None
         self._sunrise_icon = None
+        self._sunset_prefix = None
+        self._sunrise_prefix = None
         super(TimeExtendedElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
     def draw3(self, drawer, images, state):
@@ -28,7 +30,7 @@ class TimeExtendedElement(ContainerElement):
                                     followxy = None,
                                     delimiter_time = self._delimiter_sunset if self._delimiter_sunset else None,
                                     minus = None,
-                                    prefix = self._sunset_prefix,
+                                    prefix = self._sunset_prefix if self._sunset_prefix else None,
                                     suffix = None)
 
         if self._sunrise_icon:
@@ -40,7 +42,7 @@ class TimeExtendedElement(ContainerElement):
                                      followxy = None,
                                      delimiter_time = self._delimiter_sunrise if self._delimiter_sunrise else None,
                                      minus = None,
-                                     prefix = self._sunrise_prefix,
+                                     prefix = self._sunrise_prefix if self._sunrise_prefix else None,
                                      suffix = None)
 
     def createChildForParameter(self, parameter):
