@@ -31,20 +31,17 @@ class StandUpProgressElement(ContainerElement):
             self._image_progress = ImageSetElement(parameter=parameter, parent=self, name='ImageProgress')
             return self._image_progress
         elif parameterId == 3:
-            pass
             from watchFaceParser.models.gts2mini.elements.common.iconSetElement import IconSetElement
             self._iconset_progress = IconSetElement(parameter = parameter, parent = self, name ='IconSetProgress')
             return self._iconset_progress
         elif parameterId == 4:
-            from watchFaceParser.models.gts2mini.elements.common.circularProgressElement import CircularProgressElement
-            self._circle_scale = CircularProgressElement(parameter=parameter, parent=self, name='CircleScale')
-            return self._circle_scale
+            from watchFaceParser.models.gts2mini.elements.common.scaleElement import ScaleElement
+            self._scale = ScaleElement(parameter=parameter, parent=self, name='PointerProgress')
+            return self._scale
         elif parameterId == 5:
             pass
         elif parameterId == 6:
-            from watchFaceParser.models.gts2mini.elements.common.scaleElement import ScaleElement
-            self._scale = ScaleElement(parameter = parameter, parent = self, name = 'Scale')
-            return self._scale
+            pass
         else:
-            print ("Unknown StepsProgressElement",parameterId)
+            print ("Unknown StandUpProgressElement",parameterId)
             return super(StandUpProgressElement, self).createChildForParameter(parameter)

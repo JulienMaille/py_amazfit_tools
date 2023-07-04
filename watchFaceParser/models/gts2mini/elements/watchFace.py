@@ -28,6 +28,8 @@ class WatchFace(ContainerElement):
         self._weather = None
         self._activity_separate_digits = None
         self._paiProgress = None
+        self._stressProgress = None
+        self._spoProgress = None
         self._alarm = None
         self._aod = None
         super(WatchFace, self).__init__(parameters, parameter = None, parent = None, name = '')
@@ -135,8 +137,6 @@ class WatchFace(ContainerElement):
             from watchFaceParser.models.gts2mini.elements.digitalDialElement import DigitalDialElement
             self._digitalTime = DigitalDialElement(parameter)
             return self._digitalTime
-        elif parameterId == 21:  #
-            pass
         elif parameterId == 22:
             from watchFaceParser.models.gts2mini.elements.hourlyImagesElement import HourlyImagesElement
             self._hourlyImages = HourlyImagesElement(parameter)
@@ -157,10 +157,14 @@ class WatchFace(ContainerElement):
             from watchFaceParser.models.gts2mini.elements.weather.uviProgressElement import UviProgressElement
             self._uviProgress = UviProgressElement(parameter)
             return self._uviProgress
-        elif parameterId == 27:  #
-            pass
-        elif parameterId == 28: #
-            pass
+        elif parameterId == 27:
+            from watchFaceParser.models.gts2mini.elements.activity.stressProgressElement import StressProgressElement
+            self._stressProgress = StressProgressElement(parameter)
+            return self._stressProgress
+        elif parameterId == 28:
+            from watchFaceParser.models.gts2mini.elements.activity.spoProgressElement import SpoProgressElement
+            self._spoProgress = SpoProgressElement(parameter)
+            return self._spoProgress
         elif parameterId == 29:
             from watchFaceParser.models.gts2mini.elements.aodElement import AodElement
             self._aod = AodElement(parameter)

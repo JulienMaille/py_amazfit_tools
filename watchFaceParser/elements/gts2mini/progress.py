@@ -13,7 +13,7 @@ class Progress:
         4: {'Name': 'CircleScale', 'Type': CircleScale}, # will work for StepProgress and CaloriesProgress only
         #5: {'Name': 'Unknown5', 'Type': 'long?'},
         6: {'Name': 'Scale', 'Type': Scale},
-        7: {'Name': 'NoDataImage', 'Type': Image},
+        7: {'Name': 'BackgroundLayer', 'Type': Image},
         8: {'Name': 'UnknownImage', 'Type': Image}, # 5bd18e5a9f7568d42f984fe540d992e9.bin
     }
 
@@ -22,34 +22,47 @@ class Alt1PointerScale:
         1: {'Name': 'PointerScale', 'Type': PointerScale},
     }
 
-class ProgressAlt1:
+class ProgressPAI:
     definitions = {
         1: {'Name': 'PointerScale', 'Type': PointerScale},
         2: {'Name': 'ImageProgress', 'Type': ImageSet},
         4: {'Name': 'Alt1PointerScale', 'Type': Alt1PointerScale},
-        6: {'Name': 'NoDataImage', 'Type': Image},
+        6: {'Name': 'BackgroundLayer', 'Type': Image},
     }
 
-class ProgressAlt2:
+class ProgressUVI:
     definitions = {
         1: {'Name': 'ImageProgress', 'Type': ImageSet},
         3: {'Name': 'Scale', 'Type': Scale},
-        5: {'Name': 'NoDataImage', 'Type': Image},
+        5: {'Name': 'BackgroundLayer', 'Type': Image},
     }
 
-class ProgressAlt3:
+class ProgressAirQ:
+    definitions = {
+        1: {'Name': 'ImageProgress', 'Type': ImageSet},
+        3: {'Name': 'Scale', 'Type': Scale},
+        5: {'Name': 'BackgroundLayer', 'Type': Image},
+    }
+
+class ProgressHumidity:
     definitions = {
         2: {'Name': 'ImageProgress', 'Type': ImageSet},
-        8: {'Name': 'NoDataImage', 'Type': Image},
+        8: {'Name': 'BackgroundLayer', 'Type': Image},
     }
 
-class ProgressAlt4:
+class ProgressSpo:
     definitions = {
         5: {'Name': 'ImageProgress', 'Type': ImageSet},
-        7: {'Name': 'NoDataImage', 'Type': Image},
+        7: {'Name': 'BackgroundLayer', 'Type': Image},
     }
 
-class ProgressAlt5:
+class ProgressStress:
+    definitions = {
+        5: {'Name': 'ImageProgress', 'Type': ImageSet},
+        7: {'Name': 'BackgroundLayer', 'Type': Image},
+    }
+
+class ProgressStandUp:
     definitions = {
         2: {'Name': 'ImageProgress', 'Type': ImageSet},
         3: {'Name': 'IconSetProgress', 'Type': IconSet},

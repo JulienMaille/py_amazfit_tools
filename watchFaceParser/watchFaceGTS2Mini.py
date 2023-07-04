@@ -5,7 +5,7 @@ from watchFaceParser.elements.gts2mini.activity import Activity
 from watchFaceParser.elements.gts2mini.dateblock import DateBlock, WeekDayImages
 from watchFaceParser.elements.gts2mini.battery import Battery
 from watchFaceParser.elements.gts2mini.analogDialFace import AnalogDialFace
-from watchFaceParser.elements.gts2mini.progress import Progress, ProgressAlt1, ProgressAlt2, ProgressAlt3, ProgressAlt4, ProgressAlt5
+from watchFaceParser.elements.gts2mini.progress import Progress, ProgressPAI, ProgressUVI, ProgressAirQ, ProgressHumidity, ProgressSpo, ProgressStress, ProgressStandUp
 from watchFaceParser.elements.gts2mini.status import Status
 from watchFaceParser.elements.gts2mini.weather import Weather
 from watchFaceParser.elements.gts2mini.animation import Animation
@@ -34,18 +34,18 @@ class WatchFace:
         14: {'Name': 'WeekDayImages', 'Type': WeekDayImages}, #56bda72eb651d3cba751c9453203bd44.bin
         15: {'Name': 'CaloriesProgress', 'Type': Progress},
         #16: {'Name': 'Unknown16', 'Type': Progress},  # Progress but for unknown parameter
-        17: {'Name': 'HumidityProgress', 'Type': ProgressAlt3},
+        17: {'Name': 'HumidityProgress', 'Type': ProgressHumidity},
         18: {'Name': 'Alarm', 'Type': Alarm},
         19: {'Name': 'Shortcuts', 'Type': Shortcuts},
         20: {'Name': 'TimeAnalog', 'Type': AnalogDialFace},
         21: {'Name': 'TimeDigital', 'Type': TimeDigital},
         22: {'Name': 'HourlyImages', 'Type': HourlyImages}, #eddc844402b6157dfb01e2b780b64b0b.bin
-        23: {'Name': 'PaiProgress', 'Type': ProgressAlt1}, #9ab2ccafb3b7b67fd47cc350236ddffe.bin
-        24: {'Name': 'StandUpProgress', 'Type': ProgressAlt5},
-        25: {'Name': 'AirQualityProgress', 'Type': ProgressAlt2},
-        26: {'Name': 'UviProgress', 'Type': ProgressAlt2}, #9ab2ccafb3b7b67fd47cc350236ddffe.bin
-        27: {'Name': 'StressProgress', 'Type': ProgressAlt4}, #4c8c5364650875f4aad4a90663e51f4a.bin
-        28: {'Name': 'SPO2Progress', 'Type': ProgressAlt4}, #4c8c5364650875f4aad4a90663e51f4a.bin
+        23: {'Name': 'PaiProgress', 'Type': ProgressPAI}, #9ab2ccafb3b7b67fd47cc350236ddffe.bin
+        24: {'Name': 'StandUpProgress', 'Type': ProgressStandUp},
+        25: {'Name': 'AirQualityProgress', 'Type': ProgressAirQ},
+        26: {'Name': 'UviProgress', 'Type': ProgressUVI}, #9ab2ccafb3b7b67fd47cc350236ddffe.bin
+        27: {'Name': 'StressProgress', 'Type': ProgressStress}, # bipu - 4c8c5364650875f4aad4a90663e51f4a.bin
+        28: {'Name': 'SPO2Progress', 'Type': ProgressSpo}, # bipu - 4c8c5364650875f4aad4a90663e51f4a.bin
         29: {'Name': 'AlwaysOnDisplay', 'Type': AlwaysOnDisplay},
         30: {'Name': 'ActivitySeparateDigits', 'Type': ActivitySeparateDigits}, #468da72c923467e6ac1c2752a238a4b3.bin
     }
