@@ -15,14 +15,14 @@ class BatteryElement(ContainerElement):
     def draw3(self, drawer, resources, state):
         if self._icon:
             self._icon.draw3(drawer, resources, state)
-        if self._text:
-            self._text.draw3(drawer, resources, state)
         if self._imageprogress:
             self._imageprogress.draw4(drawer, resources, state.getBatteryLevel(), 100)
         if self._iconset_progress:
             self._iconset_progress.draw4(drawer, resources, state.getBatteryLevel(), 100)
         if self._scale:
             self._scale.draw4(drawer, resources, state.getBatteryLevel(), 100)
+        if self._text:
+            self._text.draw3(drawer, resources, state)
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
