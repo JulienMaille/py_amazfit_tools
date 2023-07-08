@@ -25,7 +25,6 @@ class WatchFace(ContainerElement):
         self._shortcuts = None
         self._digitalTime = None
         self._hourlyImages = None
-        self._weather = None
         self._activity_separate_digits = None
         self._paiProgress = None
         self._stressProgress = None
@@ -37,18 +36,78 @@ class WatchFace(ContainerElement):
 
     def draw3(self, drawer, images, state):
         if state.getScreenIdle() is None:
-            super(WatchFace, self).draw3(drawer, images, state)
-            if self._animation:
-                self._animation.draw3(drawer, images, state) # draw animaiton on top
+            self.drawWatchface(drawer, images, state)
         else:
             if self._aod and not Config.isBip3Mode():
                 self.drawBlackBackground(drawer)
                 self._aod.draw3(drawer, images, state)
             else: # no AOD - normal Screen
-                super(WatchFace, self).draw3(drawer, images, state)
-                if self._animation:
-                    self._animation.draw3(drawer, images, state) # draw animaiton on top
+                self.drawWatchface(drawer, images, state)
             return
+        
+    def drawWatchface(self, drawer, images, state):
+        if self._background:
+            self._background.draw3(drawer, images, state)
+        if self._time_extended:
+            self._time_extended.draw3(drawer, images, state)
+
+        
+        if self._stepsProgress:
+            self._stepsProgress.draw3(drawer, images, state)
+        if self._caloriesProgress:
+            self._caloriesProgress.draw3(drawer, images, state)
+        if self._caloriesProgress:
+            self._caloriesProgress.draw3(drawer, images, state)
+        if self._heartProgress:
+            self._heartProgress.draw3(drawer, images, state)
+        if self._standUpProgress:
+            self._standUpProgress.draw3(drawer, images, state)
+        if self._humidityProgress:
+            self._humidityProgress.draw3(drawer, images, state)
+        if self._uviProgress:
+            self._uviProgress.draw3(drawer, images, state)
+        if self._airQualityProgress:
+            self._airQualityProgress.draw3(drawer, images, state)
+        if self._daysProgress:
+            self._daysProgress.draw3(drawer, images, state)
+        if self._paiProgress:
+            self._paiProgress.draw3(drawer, images, state)
+            
+        if self._activity:
+            self._activity.draw3(drawer, images, state)
+        if self._date:
+            self._date.draw3(drawer, images, state)
+        if self._weather:
+            self._weather.draw3(drawer, images, state)
+
+        if self._status:
+            self._status.draw3(drawer, images, state)
+        if self._battery:
+            self._battery.draw3(drawer, images, state)
+        if self._analogDial:
+            self._analogDial.draw3(drawer, images, state)
+        if self._digitalTime:
+            self._digitalTime.draw3(drawer, images, state)
+        if self._shortcuts:
+            self._shortcuts.draw3(drawer, images, state)
+        if self._digitalTime:
+            self._digitalTime.draw3(drawer, images, state)
+        if self._hourlyImages:
+            self._hourlyImages.draw3(drawer, images, state)
+        if self._activity_separate_digits:
+            self._activity_separate_digits.draw3(drawer, images, state)
+
+        if self._stressProgress:
+            self._stressProgress.draw3(drawer, images, state)
+        if self._spoProgress:
+            self._spoProgress.draw3(drawer, images, state)
+        if self._alarm:
+            self._alarm.draw3(drawer, images, state)
+        if self._weekdayimages:
+            self._weekdayimages.draw3(drawer, images, state)
+        if self._animation:
+            self._animation.draw3(drawer, images, state) # draw animaiton on top
+
 
     def drawBlackBackground(self, drawer):
         from resources.image.color import Color
