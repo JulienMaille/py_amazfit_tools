@@ -4,6 +4,7 @@ from watchFaceParser.models.gts2mini.elements.basic.containerElement import Cont
 
 class StressProgressElement(ContainerElement):
     def __init__(self, parameter, parent = None, name = None):
+        self._image_number = None
         self._circular = None
         self._image_progress = None
         self._iconset_progress = None
@@ -26,11 +27,20 @@ class StressProgressElement(ContainerElement):
             self._circle_scale.draw4(drawer, resources, state, maximal)
         if self._scale:
             self._scale.draw4(drawer, resources, state, maximal)
+        if self._image_number:
+            self._image_number.draw4(drawer,
+                                     resources,
+                                     state,
+                                     minimum_digits= 3,
+                                     force_padding = False,
+                                     followxy = None)
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
         if parameterId == 1:
-            pass
+            from watchFaceParser.models.gts2mini.elements.common.numberElement import NumberElement
+            self._image_number = NumberElement(parameter, self, 'ImageNumber')
+            return self._image_number
         elif parameterId == 2:
             pass
         elif parameterId == 3:

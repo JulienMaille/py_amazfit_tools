@@ -4,7 +4,7 @@ from watchFaceParser.elements.gts2mini.basicElements.iconSet import IconSet
 from watchFaceParser.elements.gts2mini.basicElements.scale import Scale
 from watchFaceParser.elements.gts2mini.basicElements.circleScale import CircleScale
 from watchFaceParser.elements.gts2mini.basicElements.pointerScale import PointerScale
-
+from watchFaceParser.elements.gts2mini.basicElements.number import Number
 class Progress:
     definitions = {
         #1: {'Name': 'Unknown1', 'Type': 'long?'}, #Text ?
@@ -52,12 +52,16 @@ class ProgressHumidity:
 
 class ProgressSpo:
     definitions = {
+        1: { 'Name': 'Text', 'Type': Number},
+        3: {'Name': 'PrefixImageIndex', 'Type': 'long'},
         5: {'Name': 'ImageProgress', 'Type': ImageSet},
         7: {'Name': 'BackgroundLayer', 'Type': Image},
     }
 
 class ProgressStress:
     definitions = {
+        1: { 'Name': 'Text', 'Type': Number},
+        3: {'Name': 'PrefixImageIndex', 'Type': 'long'},
         5: {'Name': 'ImageProgress', 'Type': ImageSet},
         7: {'Name': 'BackgroundLayer', 'Type': Image},
     }
