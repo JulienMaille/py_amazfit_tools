@@ -11,8 +11,8 @@ class TimeSeparateDigits:
         4: {'Name': 'DrawOrder', 'Type': 'long?'}, # fa8a3747713543ddbfebbfcf25cfe3f8.bin - 13330 0x3412 -> 3,4,1,2 -> m1,m2,h1,h2
         5: {'Name': 'SeparatorHours', 'Type': Image}, # separator hours ?
         6: {'Name': 'SeparatorMinutes', 'Type': Image}, # separator minutes ?
-        7: {'Name': 'PaddingZeroHours', 'Type': 'bool'},
-        8: {'Name': 'PaddingZeroMinutes', 'Type': 'bool'},
+        7: {'Name': 'UnknowBoolean7', 'Type': 'bool'}, # no effect on padding zerro. no idea
+        8: {'Name': 'PaddingZeroMinutes', 'Type': 'bool'}, # padding zero for both: hours and minutes
     }
 
 class TimeExtended:

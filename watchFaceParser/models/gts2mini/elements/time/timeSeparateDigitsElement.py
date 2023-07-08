@@ -12,8 +12,7 @@ class TimeSeparateDigitsElement(ContainerElement):
         self._drawingOrder = [1, 2, 3, 4]
         self._separatorHours = None
         self._separatorMinutes = None
-        self._padding_zero_hours = None
-        self._padding_zero_minutes = None
+        self._padding_zero = None
         super(TimeSeparateDigitsElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
 
@@ -22,15 +21,18 @@ class TimeSeparateDigitsElement(ContainerElement):
 
         hours = state.getTime().hour
 
+        #
+
+
         for i in range(0, 4):
             if self._hours and self._hours.getTens() and self._drawingOrder[i] == 1:
-                if self._padding_zero_hours or int(hours % 100 / 10) > 0:
+                if self._padding_zero or int(hours % 100 / 10) > 0:
                     self._hours.getTens().draw3(drawer, images, int(hours % 100 / 10))
             if self._hours and self._hours.getOnes() and self._drawingOrder[i] == 2:
                 self._hours.getOnes().draw3(drawer, images, hours % 10)
 
             if self._minutes and self._minutes.getTens() and self._drawingOrder[i] == 3:
-                if self._padding_zero_minutes or int(state.getTime().minute % 100 / 10) > 0:
+                if self._padding_zero or int(state.getTime().minute % 100 / 10) > 0:
                     self._minutes.getTens().draw3(drawer, images, int(state.getTime().minute % 100 / 10))
             if self._minutes and self._minutes.getOnes() and self._drawingOrder[i] == 4:
                 self._minutes.getOnes().draw3(drawer, images, state.getTime().minute % 10)
@@ -69,12 +71,10 @@ class TimeSeparateDigitsElement(ContainerElement):
             self._separatorMinutes = ImageElement(parameter = parameter, parent = self, name ='SeparatorMinutes')
             return self._separatorMinutes
         elif parameterId == 7:
-            from watchFaceParser.models.gts2mini.elements.basic.valueElement import ValueElement
-            self._padding_zero_hours = parameter.getValue()
-            return ValueElement(parameter, self, 'PaddingZeroHours')
+            pass
         elif parameterId == 8:
             from watchFaceParser.models.gts2mini.elements.basic.valueElement import ValueElement
-            self._padding_zero_minutes = parameter.getValue()
+            self._padding_zero = parameter.getValue()
             return ValueElement(parameter, self, 'PaddingZeroMinutes')
         else:
             print ("Unknown TimeSeparateDigitsElement",parameterId)
