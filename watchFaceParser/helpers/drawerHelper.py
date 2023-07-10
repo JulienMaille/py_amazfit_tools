@@ -39,9 +39,11 @@ class DrawerHelper:
         else:
             x = box.getLeft() + int((box.getRight() - box.getLeft() - bitmapWidth) / 2)
 
-        if alignmentFlag.hasFlag(TextAlignment.Top):
+        if (not alignmentFlag.hasFlag(TextAlignment.Vertical) and alignmentFlag.hasFlag(TextAlignment.Top)) or (
+                alignmentFlag.hasFlag(TextAlignment.Vertical) and alignmentFlag.hasFlag(TextAlignment.Left)):
             y = box.getTop()
-        elif alignmentFlag.hasFlag(TextAlignment.Bottom):
+        elif (not alignmentFlag.hasFlag(TextAlignment.Vertical) and alignmentFlag.hasFlag(TextAlignment.Bottom)) or (
+                  alignmentFlag.hasFlag(TextAlignment.Vertical) and alignmentFlag.hasFlag(TextAlignment.Right)):
             y = box.getBottom() - bitmapHeight + 1
         else:
             y = box.getTop() + int((box.getBottom() - box.getTop() - bitmapHeight) / 2)
@@ -55,8 +57,11 @@ class DrawerHelper:
             temp = image.getBitmap()
             drawer.paste(temp, (x,y), temp)
 
-            imageWidth = image.getBitmap().size[0]
-            x += imageWidth + int(spacing)
+            if alignmentFlag.hasFlag(TextAlignment.Vertical):
+                y += image.getBitmap().size[1]
+            else:
+                x += image.getBitmap().size[0]
+            x += int(spacing)
             if alignmentFlag.hasFlag(TextAlignment.Right):
                 y -= verticalOffset
             else:

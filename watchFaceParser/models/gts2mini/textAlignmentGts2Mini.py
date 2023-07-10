@@ -20,7 +20,9 @@ class TextAlignmentGts2Mini:
     BottomLeft = Bottom | Left
     BottomRight = Bottom | Right
 
-    Unknown130 = 130 # bipu - d45d3d25a9e51c543a9d47dc39c5b068
+    Vertical = 128 # gts2min - 531199d7cab489d94fdec39e0b6e5b6a
+    VerticalLeft = Vertical | Left # 130 - bipu - d45d3d25a9e51c543a9d47dc39c5b068
+    VerticalRight = Vertical | Right # 132
 
     Converter = {
         Default : "Default",
@@ -41,7 +43,9 @@ class TextAlignmentGts2Mini:
         BottomLeft : "BottomLeft",
         BottomRight : "BottomRight",
 
-        Unknown130: "Unknown130"
+        Vertical: "Vertical",
+        VerticalLeft: "VerticalLeft",
+        VerticalRight: "VerticalRight"
     }
 
     def __init__(self, flag):

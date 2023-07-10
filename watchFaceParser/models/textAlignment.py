@@ -8,6 +8,8 @@ class TextAlignment:
     Bottom = 32
     VCenter = 64
 
+    Vertical = 128
+
     TopCenter = Top | HCenter
     TopLeft = Top | Left
     TopRight = Top | Right
@@ -19,6 +21,9 @@ class TextAlignment:
     BottomCenter = Bottom | HCenter
     BottomLeft = Bottom | Left
     BottomRight = Bottom | Right
+
+    VerticalLeft = Vertical | Left
+    VerticalRight = Vertical | Right
 
     Converter = {
         Default : "Default",
@@ -38,6 +43,10 @@ class TextAlignment:
         BottomCenter : "BottomCenter",
         BottomLeft : "BottomLeft",
         BottomRight : "BottomRight",
+
+        Vertical : "Vertical",
+        VerticalLeft : "VerticalLeft",
+        VerticalRight : "VerticalRight"
     }
 
     def __init__(self, flag):
