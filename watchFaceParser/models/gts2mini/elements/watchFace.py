@@ -72,42 +72,50 @@ class WatchFace(ContainerElement):
             self._daysProgress.draw3(drawer, images, state)
         if self._paiProgress:
             self._paiProgress.draw3(drawer, images, state)
+        if self._stressProgress:
+            self._stressProgress.draw3(drawer, images, state)
+        if self._spoProgress:
+            self._spoProgress.draw3(drawer, images, state)
             
         if self._activity:
             self._activity.draw3(drawer, images, state)
+
         if self._date:
             self._date.draw3(drawer, images, state)
+
         if self._weather:
             self._weather.draw3(drawer, images, state)
 
         if self._status:
             self._status.draw3(drawer, images, state)
+
         if self._battery:
             self._battery.draw3(drawer, images, state)
+
+        if self._digitalTime:
+            self._digitalTime.draw3(drawer, images, state)
+
         if self._analogDial:
             self._analogDial.draw3(drawer, images, state)
-        if self._digitalTime:
-            self._digitalTime.draw3(drawer, images, state)
-        if self._shortcuts:
-            self._shortcuts.draw3(drawer, images, state)
-        if self._digitalTime:
-            self._digitalTime.draw3(drawer, images, state)
+
         if self._hourlyImages:
             self._hourlyImages.draw3(drawer, images, state)
+
         if self._activity_separate_digits:
             self._activity_separate_digits.draw3(drawer, images, state)
 
-        if self._stressProgress:
-            self._stressProgress.draw3(drawer, images, state)
-        if self._spoProgress:
-            self._spoProgress.draw3(drawer, images, state)
         if self._alarm:
             self._alarm.draw3(drawer, images, state)
+
         if self._weekdayimages:
             self._weekdayimages.draw3(drawer, images, state)
+
         if self._animation:
             self._animation.draw3(drawer, images, state) # draw animaiton on top
 
+        if self._shortcuts:
+            self._shortcuts.draw3(drawer, images, state)
+            
 
     def drawBlackBackground(self, drawer):
         from resources.image.color import Color
