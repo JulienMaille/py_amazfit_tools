@@ -7,6 +7,7 @@ from watchFaceParser.utils.parametersConverter import uint2int
 class UvindexElement(CompositeElement):
     def __init__(self, parameter, parent, name = None):
         self._number = None
+        self._nodata = None
         self._suffix = None
         self._prefix = None
         self._image = None
@@ -36,6 +37,10 @@ class UvindexElement(CompositeElement):
             from watchFaceParser.models.gts2mini.elements.basic.valueElement import ValueElement
             self._prefix = parameter.getValue()
             return ValueElement(parameter, self, 'PrefixImageIndex')
+        elif parameterId == 6:
+            from watchFaceParser.models.gts2mini.elements.basic.valueElement import ValueElement
+            self._nodata = parameter.getValue()
+            return ValueElement(parameter, self, 'NoDataImageIndex')
         elif parameterId == 9:
             from watchFaceParser.models.gts2mini.elements.common.imageElement import ImageElement
             self._image = ImageElement(parameter, self, 'UVindexIcon')

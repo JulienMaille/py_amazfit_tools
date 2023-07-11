@@ -9,17 +9,22 @@ class PulseProgressElement(ContainerElement):
         self._iconset_progress = None
         self._circle_scale = None
         self._scale = None
+        self._background = None
         super(PulseProgressElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
     def draw3(self, drawer, resources, state):
+        import random
+        maximal = 150
+        if self._background:
+            self._background.draw3(drawer, resources, state)
         if self._image_progress:
-            self._image_progress.draw4(drawer, resources, state.getPulse(), 150)
+            self._image_progress.draw4(drawer, resources, state.getPulse(), maximal)
         if self._iconset_progress:
-            self._iconset_progress.draw4(drawer, resources, state.getPulse(), 150)
+            self._iconset_progress.draw4(drawer, resources, state.getPulse(), maximal)
         if self._circle_scale:
-            self._circle_scale.draw4(drawer, resources, state.getPulse(), 150)
+            self._circle_scale.draw4(drawer, resources, state.getPulse(), maximal)
         if self._scale:
-            self._scale.draw4(drawer, resources, state.getPulse(), 150)
+            self._scale.draw4(drawer, resources, state.getPulse(), maximal)
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
@@ -45,6 +50,10 @@ class PulseProgressElement(ContainerElement):
             from watchFaceParser.models.gts2mini.elements.common.scaleElement import ScaleElement
             self._scale = ScaleElement(parameter = parameter, parent = self, name = 'Scale')
             return self._scale
+        elif parameterId == 7: # BackgroundLayer
+            from watchFaceParser.models.gts2mini.elements.common.imageElement import ImageElement
+            self._background = ImageElement(parameter=parameter, parent=self, name='BackgroundLayer')
+            return self._background
         else:
             print ("Unknown PulseProgressElement",parameterId)
             return super(PulseProgressElement, self).createChildForParameter(parameter)

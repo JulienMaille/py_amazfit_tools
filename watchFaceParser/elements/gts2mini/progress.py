@@ -13,8 +13,7 @@ class Progress:
         4: {'Name': 'CircleScale', 'Type': CircleScale}, # will work for StepProgress and CaloriesProgress only
         #5: {'Name': 'Unknown5', 'Type': 'long?'},
         6: {'Name': 'Scale', 'Type': Scale},
-        7: {'Name': 'BackgroundLayer', 'Type': Image},
-        8: {'Name': 'UnknownImage', 'Type': Image}, # 5bd18e5a9f7568d42f984fe540d992e9.bin
+        8: {'Name': 'BackgroundLayer', 'Type': Image}, # 5bd18e5a9f7568d42f984fe540d992e9.bin 4961c75712fb6f7082040899ff1d3b72.bin f458b060c4c5dd855fee965c0de750dd.bin
     }
 
 class Alt1PointerScale:
@@ -52,7 +51,7 @@ class ProgressHumidity:
 
 class ProgressSpo:
     definitions = {
-        1: { 'Name': 'Text', 'Type': Number},
+        1: {'Name': 'Text', 'Type': Number},
         3: {'Name': 'PrefixImageIndex', 'Type': 'long'},
         5: {'Name': 'ImageProgress', 'Type': ImageSet},
         7: {'Name': 'BackgroundLayer', 'Type': Image},
@@ -60,7 +59,7 @@ class ProgressSpo:
 
 class ProgressStress:
     definitions = {
-        1: { 'Name': 'Text', 'Type': Number},
+        1: {'Name': 'Text', 'Type': Number},
         3: {'Name': 'PrefixImageIndex', 'Type': 'long'},
         5: {'Name': 'ImageProgress', 'Type': ImageSet},
         7: {'Name': 'BackgroundLayer', 'Type': Image},
