@@ -41,15 +41,15 @@ class StepsElement(CompositeElement):
         if parameterId == 1:
             from watchFaceParser.models.gts2mini.elements.common.numberElement import NumberElement
             self._image_number = NumberElement(parameter, self, 'ImageNumber')
-            return self._image_number
         elif parameterId == 2:
-            from watchFaceParser.models.gts2mini.elements.basic.valueElement import ValueElement
-            self._prefix = parameter.getValue()
-            return ValueElement(parameter, self, 'PrefixImageIndex')
-        elif parameterId == 3:
             from watchFaceParser.models.gts2mini.elements.basic.valueElement import ValueElement
             self._suffix = parameter.getValue()
             return ValueElement(parameter, self, 'SuffixImageIndex')
+            return self._image_number
+        elif parameterId == 3:
+            from watchFaceParser.models.gts2mini.elements.basic.valueElement import ValueElement
+            self._prefix = parameter.getValue()
+            return ValueElement(parameter, self, 'PrefixImageIndex')
         elif parameterId == 4:
             from watchFaceParser.models.gts2mini.elements.common.imageElement import ImageElement
             self._icon = ImageElement(parameter=parameter, parent=self, name='Icon')
