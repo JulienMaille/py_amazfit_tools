@@ -4,6 +4,7 @@ from watchFaceParser.models.gts2mini.elements.basic.containerElement import Cont
 
 class StepProgressElement(ContainerElement):
     def __init__(self, parameter, parent = None, name = None):
+        self._background = None
         self._circular = None
         self._image_progress = None
         self._iconset_progress = None
@@ -12,6 +13,8 @@ class StepProgressElement(ContainerElement):
         super(StepProgressElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
     def draw3(self, drawer, resources, state):
+        if self._background:
+            self._background.draw3(drawer, resources, state)
         if self._image_progress:
             self._image_progress.draw4(drawer, resources, state.getSteps(), state.getGoal())
         if self._iconset_progress:
@@ -43,6 +46,10 @@ class StepProgressElement(ContainerElement):
             from watchFaceParser.models.gts2mini.elements.common.scaleElement import ScaleElement
             self._scale = ScaleElement(parameter = parameter, parent = self, name = 'Scale')
             return self._scale
+        elif parameterId == 8: # BackgroundLayer
+            from watchFaceParser.models.gts2mini.elements.common.imageElement import ImageElement
+            self._background = ImageElement(parameter=parameter, parent=self, name='BackgroundLayer')
+            return self._background
         else:
             print ("Unknown StepsProgressElement",parameterId)
             return super(StepProgressElement, self).createChildForParameter(parameter)
