@@ -253,6 +253,12 @@ class Writer:
                     temp_data.clear()
                     start_x = 0
                     pixel_width = 0
+        if len(temp_data) > 0:
+            #logging.debug(f"1 y: {y}, x: {start_x}, data_length: {len(temp_data)}")
+            result.extend((y).to_bytes(2, byteorder='little'))
+            result.extend(start_x.to_bytes(2, byteorder='little'))
+            result.extend(pixel_width.to_bytes(2, byteorder='little'))
+            result.extend(temp_data)
 
         return result
 
