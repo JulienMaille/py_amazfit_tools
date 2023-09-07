@@ -5,7 +5,7 @@ from watchFaceParser.elements.gts2mini.activity import Activity
 from watchFaceParser.elements.gts2mini.dateblock import DateBlock, WeekDayImages
 from watchFaceParser.elements.gts2mini.battery import Battery
 from watchFaceParser.elements.gts2mini.analogDialFace import AnalogDialFace
-from watchFaceParser.elements.gts2mini.progress import Progress, ProgressPAI, ProgressUVI, ProgressAirQ, ProgressHumidity, ProgressSpo, ProgressStress, ProgressStandUp
+from watchFaceParser.elements.gts2mini.progress import ProgressSteps, ProgressCalories, ProgressHeart, ProgressPAI, ProgressUVI, ProgressAirQ, ProgressHumidity, ProgressSpo, ProgressStress, ProgressStandUp
 from watchFaceParser.elements.gts2mini.status import Status
 from watchFaceParser.elements.gts2mini.weather import Weather
 from watchFaceParser.elements.gts2mini.animation import Animation
@@ -24,15 +24,15 @@ class WatchFace:
         4: {'Name': 'Activity', 'Type': Activity},
         5: {'Name': 'DateBlock', 'Type': DateBlock},
         6: {'Name': 'Weather', 'Type': Weather},
-        7: {'Name': 'StepProgress', 'Type': Progress},
+        7: {'Name': 'StepProgress', 'Type': ProgressSteps},
         8: {'Name': 'Status', 'Type': Status},
         9: {'Name': 'Battery', 'Type': Battery},
         #10: {'Name': 'Unknown10', 'Type': 'long?'}, # not Progress, shows nothing
         11: {'Name': 'Animation', 'Type': Animation},
-        12: {'Name': 'HeartProgress', 'Type': Progress},
+        12: {'Name': 'HeartProgress', 'Type': ProgressHeart},
         #13: {'Name': 'Unknown13', 'Type': 'long?'}, # not Progress, show a chinese character
         14: {'Name': 'WeekDayImages', 'Type': WeekDayImages}, #56bda72eb651d3cba751c9453203bd44.bin
-        15: {'Name': 'CaloriesProgress', 'Type': Progress},
+        15: {'Name': 'CaloriesProgress', 'Type': ProgressCalories},
         #16: {'Name': 'Unknown16', 'Type': Progress},  # Progress but for unknown parameter
         17: {'Name': 'HumidityProgress', 'Type': ProgressHumidity},
         18: {'Name': 'Alarm', 'Type': Alarm},
