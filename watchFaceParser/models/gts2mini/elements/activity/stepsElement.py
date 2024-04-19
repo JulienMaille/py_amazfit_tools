@@ -45,7 +45,6 @@ class StepsElement(CompositeElement):
             from watchFaceParser.models.gts2mini.elements.basic.valueElement import ValueElement
             self._suffix = parameter.getValue()
             return ValueElement(parameter, self, 'SuffixImageIndex')
-            return self._image_number
         elif parameterId == 3:
             from watchFaceParser.models.gts2mini.elements.basic.valueElement import ValueElement
             self._prefix = parameter.getValue()

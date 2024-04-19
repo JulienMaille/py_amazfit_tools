@@ -80,12 +80,13 @@ class WatchFace(ContainerElement):
         if self._activity:
             self._activity.draw3(drawer, images, state)
 
-        if self._date:
-            self._date.draw3(drawer, images, state)
 
         if self._weather:
             self._weather.draw3(drawer, images, state)
 
+        if self._date:
+            self._date.draw3(drawer, images, state)
+            
         if self._status:
             self._status.draw3(drawer, images, state)
 
