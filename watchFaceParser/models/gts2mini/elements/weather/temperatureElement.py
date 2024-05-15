@@ -37,12 +37,12 @@ class TemperatureElement(CompositeElement):
             return self._current
         elif parameterId == 3:
             from watchFaceParser.models.gts2mini.elements.weather.weatherTextElement import WeatherTextElement
-            self._lowest = WeatherTextElement(parameter, self, 'Lowest')
-            return self._lowest
-        if parameterId == 4:
-            from watchFaceParser.models.gts2mini.elements.weather.weatherTextElement import WeatherTextElement
             self._highes = WeatherTextElement(parameter, self, 'Highest')
             return self._highes
+        if parameterId == 4:
+            from watchFaceParser.models.gts2mini.elements.weather.weatherTextElement import WeatherTextElement
+            self._lowest = WeatherTextElement(parameter, self, 'Lowest')
+            return self._lowest
         else:
             print ("Unknown TemperatureElement",parameterId)
             super(TemperatureElement, self).createChildForParameter(parameter)
