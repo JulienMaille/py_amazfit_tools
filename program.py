@@ -338,7 +338,13 @@ class Parser:
                 rounded_rectangle(d,(5,5 , new_w-5,new_h-5),corner_radius,(255,255,255,0))
                 im_resized.paste(mask,(0,0),mask)
 
-            im_resized.save(os.path.join(outputDirectory, f"{baseName}_static_{new_h}.png"))
+            # remove transparent background from static preview image
+            back = Image.new('RGB', im_resized.size)
+            d = ImageDraw.Draw(back)
+            d.rectangle([(0, 0), im_resized.size], fill="#000000")
+            back.paste(im_resized)
+
+            back.save(os.path.join(outputDirectory, f"{baseName}_static_{new_h}.png"))
             logging.debug("Generating static preview save done...")
 
             previewImages = PreviewGenerator.createAnimation(parameters, images, states)
